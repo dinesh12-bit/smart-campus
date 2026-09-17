@@ -1,0 +1,1016 @@
+.technician-complaints-page {
+    width: 100%;
+    min-height: 100%;
+    align-self: stretch;
+    padding: 34px 38px 40px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #0f172a;
+    text-align: left;
+}
+
+.technician-complaints-header {
+    margin-bottom: 21px;
+}
+
+.technician-complaints-header h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+
+.technician-complaints-header p {
+    margin: 7px 0 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* Loading */
+
+.technician-complaints-loading {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.technician-complaints-loading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.technician-complaints-spinner {
+    width: 31px;
+    height: 31px;
+    border: 3px solid #dbeafe;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: technicianComplaintsSpin 0.8s linear infinite;
+}
+
+@keyframes technicianComplaintsSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Stats */
+
+.technician-complaints-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 17px;
+}
+
+.technician-complaint-stat-card {
+    min-height: 76px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    border: 1px solid #dce3ee;
+    border-radius: 11px;
+    background: #ffffff;
+}
+
+.complaint-stat-icon {
+    width: 39px;
+    height: 39px;
+    flex: 0 0 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.complaint-stat-icon.blue {
+    background: #e8f0ff;
+    color: #2563eb;
+}
+
+.complaint-stat-icon.orange {
+    background: #fff3df;
+    color: #f97316;
+}
+
+.complaint-stat-icon.purple {
+    background: #f0e8ff;
+    color: #7c3aed;
+}
+
+.complaint-stat-icon.green {
+    background: #e7f8ef;
+    color: #16a34a;
+}
+
+.technician-complaint-stat-card > div:last-child {
+    min-width: 0;
+}
+
+.technician-complaint-stat-card span {
+    display: block;
+    margin-bottom: 3px;
+    color: #718096;
+    font-size: 10px;
+    line-height: 1.3;
+}
+
+.technician-complaint-stat-card strong {
+    display: block;
+    color: #111827;
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+
+/* Toolbar */
+
+.technician-complaints-toolbar {
+    width: 100%;
+    margin-bottom: 13px;
+}
+
+.technician-complaints-filters {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.technician-complaints-search-box {
+    width: 360px;
+    height: 38px;
+    position: relative;
+}
+
+.technician-complaints-search-box svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.technician-complaints-search-box input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 12px 0 35px;
+    border: 1px solid #dce3ee;
+    border-radius: 7px;
+    outline: none;
+    background: #ffffff;
+    color: #475569;
+    font-size: 11px;
+}
+
+.technician-complaints-search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.technician-complaints-search-box input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.07);
+}
+
+
+/* Dropdown */
+
+.technician-filter-dropdown {
+    width: 114px;
+    position: relative;
+}
+
+.technician-filter-dropdown-btn {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px 0 12px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    border: 1px solid #dce3ee;
+    border-radius: 7px;
+    outline: none;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.technician-filter-dropdown-btn:hover {
+    border-color: #c4b5fd;
+}
+
+.technician-filter-dropdown-btn:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.08);
+}
+
+.technician-filter-dropdown-btn svg {
+    flex-shrink: 0;
+}
+
+.technician-filter-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 1px solid #ddd6fe;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.13);
+}
+
+.technician-filter-dropdown-menu button {
+    width: 100%;
+    height: 31px;
+    padding: 0 9px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #64748b;
+    text-align: left;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.technician-filter-dropdown-menu button:hover {
+    background: #f5f3ff;
+    color: #6d28d9;
+}
+
+.technician-filter-dropdown-menu button.selected {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.technician-filter-dropdown-menu button.selected:hover {
+    background: #6d28d9;
+    color: #ffffff;
+}
+
+
+/* Table */
+
+.technician-complaints-table-card {
+    width: 100%;
+    border: 1px solid #dce3ee;
+    border-radius: 13px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.technician-complaints-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.technician-complaints-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.technician-complaints-table thead {
+    background: #f8f9fc;
+}
+
+.technician-complaints-table th {
+    height: 49px;
+    padding: 0 13px;
+    border-bottom: 1px solid #e5e9f0;
+    text-align: left;
+    white-space: nowrap;
+    color: #53657f;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.technician-complaints-table td {
+    height: 81px;
+    padding: 0 13px;
+    border-bottom: 1px solid #edf0f5;
+    vertical-align: middle;
+    color: #475569;
+    font-size: 10px;
+}
+
+.technician-complaints-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.technician-complaints-table tbody tr:hover {
+    background: #fcfcff;
+}
+
+.technician-complaints-table th:nth-child(1),
+.technician-complaints-table td:nth-child(1) {
+    width: 48px;
+}
+
+.technician-complaints-table th:nth-child(2),
+.technician-complaints-table td:nth-child(2) {
+    width: 235px;
+}
+
+.technician-complaints-table th:nth-child(3),
+.technician-complaints-table td:nth-child(3) {
+    width: 110px;
+}
+
+.technician-complaints-table th:nth-child(4),
+.technician-complaints-table td:nth-child(4) {
+    width: 105px;
+}
+
+.technician-complaints-table th:nth-child(5),
+.technician-complaints-table td:nth-child(5) {
+    width: 90px;
+}
+
+.technician-complaints-table th:nth-child(6),
+.technician-complaints-table td:nth-child(6) {
+    width: 80px;
+}
+
+.technician-complaints-table th:nth-child(7),
+.technician-complaints-table td:nth-child(7) {
+    width: 90px;
+}
+
+.technician-complaints-table th:nth-child(8),
+.technician-complaints-table td:nth-child(8) {
+    width: 85px;
+}
+
+.technician-complaints-table th:nth-child(9),
+.technician-complaints-table td:nth-child(9) {
+    width: 60px;
+}
+
+
+/* Table content */
+
+.technician-complaint-id {
+    color: #64748b;
+    font-size: 10px;
+}
+
+.technician-complaint-title {
+    max-width: 220px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.technician-complaint-description {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.complaint-student-cell {
+    min-width: 0;
+}
+
+.complaint-student-cell strong {
+    display: block;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.complaint-student-cell span {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.technician-complaint-room {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    color: #64748b;
+    font-size: 9px;
+}
+
+.technician-complaint-room svg {
+    flex-shrink: 0;
+    color: #7c3aed;
+}
+
+.technician-complaint-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-size: 8px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.complaint-priority-low {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.complaint-priority-medium {
+    background: #fff4d8;
+    color: #d08b00;
+}
+
+.complaint-priority-high {
+    background: #ffe8e8;
+    color: #dc2626;
+}
+
+.complaint-priority-critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.complaint-status-pending {
+    background: #fff4d8;
+    color: #b77900;
+}
+
+.complaint-status-assigned {
+    background: #e8f0ff;
+    color: #2563eb;
+}
+
+.complaint-status-in-progress {
+    background: #f0e8ff;
+    color: #7c3aed;
+}
+
+.complaint-status-resolved {
+    background: #e7f8ef;
+    color: #16a34a;
+}
+
+.technician-complaints-table td:nth-child(5) {
+    color: #64748b;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.technician-complaints-table td:nth-child(8) {
+    color: #64748b;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+
+/* View */
+
+.technician-complaint-view {
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.technician-complaint-view:hover {
+    border-color: #c4b5fd;
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+
+/* Empty */
+
+.technician-complaints-empty {
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+}
+
+.technician-complaints-empty svg {
+    color: #c4b5fd;
+}
+
+.technician-complaints-empty strong {
+    color: #475569;
+    font-size: 11px;
+}
+
+.technician-complaints-empty span {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+
+/* Error */
+
+.technician-complaints-error {
+    padding: 14px 18px;
+    color: #dc2626;
+    font-size: 11px;
+}
+
+
+/* Modal */
+
+.technician-complaint-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.42);
+}
+
+.technician-complaint-modal {
+    width: min(680px, 100%);
+    max-height: 88vh;
+    overflow-y: auto;
+    border-radius: 13px;
+    background: #ffffff;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.2);
+}
+
+.technician-complaint-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.technician-complaint-modal-header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.technician-complaint-modal-header span {
+    display: block;
+    margin-top: 5px;
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+.technician-complaint-modal-close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 7px;
+    background: #f5f6fa;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.technician-complaint-modal-close:hover {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.technician-complaint-modal-body {
+    padding: 20px 22px;
+}
+
+
+/* Modal summary */
+
+.complaint-modal-summary {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 16px;
+    border: 1px solid #e8e5f7;
+    border-radius: 10px;
+    background: #fbfaff;
+}
+
+.complaint-modal-icon {
+    width: 39px;
+    height: 39px;
+    flex: 0 0 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #f0e8ff;
+    color: #7c3aed;
+}
+
+.complaint-modal-summary-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.complaint-modal-summary-content h3 {
+    margin: 1px 0 5px;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.complaint-modal-summary-content p {
+    margin: 0 0 6px;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.complaint-modal-summary-content span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #7c3aed;
+    font-size: 9px;
+}
+
+
+/* Detail */
+
+.complaint-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.complaint-detail-card {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+    border: 1px solid #edf0f5;
+    border-radius: 8px;
+}
+
+.complaint-detail-card > svg {
+    flex-shrink: 0;
+    color: #7c3aed;
+}
+
+.complaint-detail-card > div {
+    min-width: 0;
+}
+
+.complaint-detail-card span {
+    display: block;
+    margin-bottom: 4px;
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.complaint-detail-card strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Description */
+
+.complaint-modal-description {
+    margin-bottom: 18px;
+}
+
+.complaint-section-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    color: #334155;
+}
+
+.complaint-section-title svg {
+    color: #7c3aed;
+}
+
+.complaint-section-title strong {
+    font-size: 10px;
+}
+
+.complaint-modal-description > p {
+    margin: 0;
+    padding: 11px 12px;
+    border-radius: 8px;
+    background: #f8f9fc;
+    color: #64748b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* Status */
+
+.complaint-status-panel {
+    padding-top: 17px;
+    border-top: 1px solid #edf0f5;
+}
+
+.complaint-current-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0 15px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f8f9fc;
+}
+
+.complaint-current-status > span {
+    color: #64748b;
+    font-size: 9px;
+}
+
+.complaint-status-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.complaint-status-label {
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.complaint-status-options {
+    display: flex;
+    gap: 8px;
+}
+
+.complaint-status-option {
+    flex: 1;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.complaint-status-option:hover {
+    background: #f8fafc;
+}
+
+.complaint-status-option.active.assigned {
+    border-color: #93c5fd;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.complaint-status-option.active.progress {
+    border-color: #c4b5fd;
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.complaint-status-option.active.resolved {
+    border-color: #86efac;
+    background: #f0fdf4;
+    color: #16a34a;
+}
+
+.status-option-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.complaint-save-status {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    border-radius: 7px;
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.complaint-save-status:hover {
+    background: #6d28d9;
+}
+
+.complaint-save-status:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.complaint-status-info {
+    margin-top: 10px;
+    padding: 9px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 7px;
+    background: #f8f9fc;
+    color: #64748b;
+    font-size: 9px;
+}
+
+.complaint-status-info svg {
+    flex-shrink: 0;
+    color: #7c3aed;
+}
+
+
+/* Footer */
+
+.technician-complaint-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 22px;
+    border-top: 1px solid #edf0f5;
+}
+
+.complaint-close-button {
+    height: 34px;
+    padding: 0 15px;
+    border: 1px solid #dce3ee;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.complaint-close-button:hover {
+    background: #f8f9fc;
+}
+
+
+/* Profile-style lavender scrollbar */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #b9a0ff transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b9a0ff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a88cff;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    .technician-complaints-page {
+        padding: 30px 28px 35px;
+    }
+
+    .technician-complaints-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .technician-complaints-page {
+        padding: 24px 18px 30px;
+    }
+
+    .technician-complaints-filters {
+        flex-wrap: wrap;
+    }
+
+    .technician-complaints-search-box {
+        width: 100%;
+    }
+
+    .technician-filter-dropdown {
+        flex: 1;
+        min-width: 110px;
+    }
+
+    .complaint-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .complaint-modal-summary {
+        flex-wrap: wrap;
+    }
+
+    .complaint-status-options {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 520px) {
+    .technician-complaints-page {
+        padding: 20px 14px 25px;
+    }
+
+    .technician-complaints-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .technician-complaint-modal-overlay {
+        padding: 12px;
+    }
+
+    .technician-complaint-modal-header,
+    .technician-complaint-modal-body,
+    .technician-complaint-modal-footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+.technician-complaints-header,
+.technician-complaints-stats,
+.technician-complaints-toolbar,
+.technician-complaints-table-card {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.technician-complaints-header {
+    text-align: left;
+}
+
+.technician-complaints-stats {
+    width: 100%;
+}
+
+.technician-complaints-toolbar {
+    width: 100%;
+}
+
+.technician-complaints-table-card {
+    width: 100%;
+}

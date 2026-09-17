@@ -1,0 +1,212 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   GLOBAL TECHNICIAN SCROLLBAR
+========================= */
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #a98cff transparent;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a98cff;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8051ed;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.technician-layout {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a98cff transparent;
+}
+
+.technician-main {
+    width: calc(100% - 255px);
+
+    min-width: 0;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin-left: 255px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.technician-topbar {
+    width: 100%;
+
+    height: 76px;
+    min-height: 76px;
+
+    padding: 0 30px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: none;
+    box-shadow: none;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 30;
+}
+
+.technician-topbar-spacer {
+    flex: 1;
+}
+
+.technician-topbar-user {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.technician-topbar-avatar {
+    width: 39px;
+    height: 39px;
+
+    min-width: 39px;
+
+    border-radius: 50%;
+
+    background: #eee8ff;
+
+    color: #7042ed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.technician-topbar-details strong {
+    display: block;
+
+    max-width: 160px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #25334d;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.technician-topbar-details span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8994a8;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.technician-page {
+    width: 100%;
+    min-width: 0;
+
+    flex: 1;
+
+    padding: 30px 32px 32px;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a98cff transparent;
+}
+
+.technician-page-no-topbar {
+    padding-top: 30px;
+
+    background: #ffffff;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .technician-main {
+        width: calc(100% - 225px);
+
+        margin-left: 225px;
+    }
+
+    .technician-page {
+        padding: 24px 22px 28px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .technician-main {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+    .technician-page {
+        padding: 20px 15px 24px;
+    }
+}

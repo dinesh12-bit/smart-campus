@@ -1,0 +1,601 @@
+.student-help-page {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+
+    background: #ffffff;
+
+    color: #172540;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.student-help-header {
+    width: 100%;
+    margin-bottom: 27px;
+}
+
+.student-help-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.student-help-back {
+    width: 38px;
+    height: 38px;
+
+    margin-top: 1px;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+    color: #1c2b47;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.student-help-back:hover {
+    background: #eee9ff;
+    color: #7042ed;
+}
+
+.student-help-title-row h1 {
+    margin: 0;
+
+    color: #12213f;
+
+    font-size: 27px;
+    font-weight: 750;
+
+    line-height: 1.2;
+}
+
+.student-help-breadcrumb {
+    margin-top: 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #8792a7;
+
+    font-size: 12px;
+}
+
+.student-help-breadcrumb span:nth-child(2) {
+    color: #a4adbd;
+    font-size: 16px;
+}
+
+.student-help-breadcrumb strong {
+    color: #65738d;
+    font-weight: 500;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.student-help-intro {
+    width: 100%;
+
+    padding: 19px 20px;
+
+    margin-bottom: 16px;
+
+    border: 1px solid #e1e6ef;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow:
+            0 3px 12px rgba(31, 48, 79, 0.035);
+}
+
+.student-help-intro-icon {
+    width: 46px;
+    height: 46px;
+
+    min-width: 46px;
+
+    border-radius: 9px;
+
+    background: #eee7ff;
+    color: #7042ed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-help-intro-content h2 {
+    margin: 0 0 4px;
+
+    color: #1b2a46;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.student-help-intro-content p {
+    margin: 0;
+
+    color: #8792a7;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.student-help-search {
+    width: 100%;
+    height: 43px;
+
+    margin-bottom: 22px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dce2ec;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #8995a9;
+}
+
+.student-help-search:focus-within {
+    border-color: #8355ee;
+
+    box-shadow:
+            0 0 0 3px rgba(112, 64, 232, 0.07);
+}
+
+.student-help-search input {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #34445f;
+
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.student-help-search input::placeholder {
+    color: #a0aabd;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.student-help-section {
+    margin-bottom: 23px;
+}
+
+.student-help-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 11px;
+}
+
+.student-help-section-heading h2 {
+    margin: 0;
+
+    color: #1d2c48;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.student-help-section-heading span {
+    color: #929db0;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+.student-faq-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.student-faq-item {
+    border: 1px solid #e2e7ef;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.student-faq-item.open {
+    border-color: #d6cdf7;
+
+    box-shadow:
+            0 4px 13px rgba(40, 44, 72, 0.05);
+}
+
+.student-faq-question {
+    width: 100%;
+    min-height: 55px;
+
+    padding: 8px 13px;
+
+    border: none;
+    outline: none;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    text-align: left;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.student-faq-question:hover {
+    background: #fcfbff;
+}
+
+.student-faq-icon {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-faq-icon.purple {
+    color: #7042ed;
+    background: #eee7ff;
+}
+
+.student-faq-icon.blue {
+    color: #277ce0;
+    background: #e1efff;
+}
+
+.student-faq-icon.green {
+    color: #18a66a;
+    background: #def7e9;
+}
+
+.student-faq-icon.orange {
+    color: #ed9510;
+    background: #fff0d3;
+}
+
+.student-faq-icon.pink {
+    color: #d85688;
+    background: #ffe9f1;
+}
+
+.student-faq-icon.red {
+    color: #e74455;
+    background: #ffe8ec;
+}
+
+.student-faq-question-text {
+    flex: 1;
+
+    color: #30405c;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.student-faq-question > svg:last-child {
+    color: #8994a8;
+
+    transition: transform 0.2s ease;
+}
+
+.student-faq-question > svg.rotate {
+    transform: rotate(180deg);
+
+    color: #7042ed;
+}
+
+.student-faq-answer {
+    padding: 0 14px 13px 58px;
+}
+
+.student-faq-answer p {
+    margin: 0;
+
+    color: #7d899d;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.student-faq-empty {
+    min-height: 150px;
+
+    border: 1px solid #e2e7ef;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #8994a8;
+
+    text-align: center;
+}
+
+.student-faq-empty h3 {
+    margin: 9px 0 4px;
+
+    color: #34435e;
+
+    font-size: 13px;
+}
+
+.student-faq-empty p {
+    margin: 0;
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   SUPPORT
+========================= */
+
+.student-support-section {
+    width: 100%;
+}
+
+.student-support-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.student-support-card {
+    min-height: 108px;
+
+    padding: 17px;
+
+    border: 1px solid #e1e6ef;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    text-align: left;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.student-support-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d5cdf5;
+
+    box-shadow:
+            0 7px 18px rgba(35, 43, 72, 0.07);
+}
+
+.student-support-icon {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-support-icon.purple {
+    color: #7042ed;
+    background: #eee7ff;
+}
+
+.student-support-icon.green {
+    color: #18a66a;
+    background: #def7e9;
+}
+
+.student-support-icon.orange {
+    color: #ed9510;
+    background: #fff0d3;
+}
+
+.student-support-card h3 {
+    margin: 1px 0 4px;
+
+    color: #263653;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.student-support-card p {
+    margin: 0 0 4px;
+
+    color: #64728a;
+
+    font-size: 10px;
+}
+
+.student-support-card span {
+    color: #9aa4b5;
+
+    font-size: 9px;
+}
+
+
+/* =========================
+   BLACK SCROLLBAR
+========================= */
+
+.student-help-page {
+    scrollbar-width: thin;
+    scrollbar-color: #222222 transparent;
+}
+
+.student-help-page::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.student-help-page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.student-help-page::-webkit-scrollbar-thumb {
+    background: #222222;
+    border-radius: 10px;
+}
+
+.student-help-page::-webkit-scrollbar-thumb:hover {
+    background: #000000;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .student-support-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .student-help-title-row h1 {
+        font-size: 23px;
+    }
+
+    .student-support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-help-intro {
+        padding: 16px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 430px) {
+
+    .student-help-title-row h1 {
+        font-size: 20px;
+    }
+
+    .student-help-back {
+        width: 32px;
+        height: 32px;
+    }
+
+    .student-help-breadcrumb {
+        font-size: 10px;
+    }
+
+    .student-faq-answer {
+        padding-left: 13px;
+    }
+}

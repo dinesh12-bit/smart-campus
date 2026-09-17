@@ -1,0 +1,414 @@
+.student-settings-page {
+    min-height: 100%;
+    background: #ffffff;
+    padding: 30px 34px 40px;
+    color: #202124;
+}
+
+.student-settings-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.student-settings-back {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e1e5eb;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-settings-back:hover {
+    background: #f5f7fb;
+}
+
+.student-settings-header h1 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.student-settings-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 7px;
+    font-size: 12px;
+    color: #98a0ad;
+}
+
+.student-settings-breadcrumb strong {
+    color: #596273;
+    font-weight: 600;
+}
+
+.student-settings-content {
+    width: min(100%, 980px);
+}
+
+.student-settings-card {
+    background: #ffffff;
+    border: 1px solid #e6e9ee;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.student-settings-card-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.student-settings-title-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.student-settings-title-icon.appearance {
+    background: #f0ebff;
+    color: #7354d7;
+}
+
+.student-settings-title-icon.notifications {
+    background: #fff2e3;
+    color: #d88328;
+}
+
+.student-settings-title-icon.dashboard {
+    background: #e9f6f1;
+    color: #2e9674;
+}
+
+.student-settings-title-icon.security {
+    background: #eaf1ff;
+    color: #4778d5;
+}
+
+.student-settings-card-header h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.student-settings-card-header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #8a929e;
+}
+
+.student-settings-row {
+    min-height: 72px;
+    padding: 17px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.student-settings-row:last-child {
+    border-bottom: none;
+}
+
+.student-settings-row-info {
+    min-width: 0;
+}
+
+.student-settings-row-info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 650;
+    color: #252a31;
+}
+
+.student-settings-row-info span {
+    display: block;
+    margin-top: 4px;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: #929aa6;
+}
+
+.student-theme-options,
+.student-font-options {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+.student-theme-options button,
+.student-font-options button {
+    min-height: 35px;
+    border: 1px solid #e1e5ea;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #59616d;
+    padding: 0 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11.5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-theme-options button:hover,
+.student-font-options button:hover {
+    border-color: #c9cfd8;
+    background: #f8f9fb;
+}
+
+.student-theme-options button.selected,
+.student-font-options button.selected {
+    border-color: #7557d8;
+    background: #f4f1ff;
+    color: #6547c6;
+}
+
+.student-toggle {
+    width: 40px;
+    height: 22px;
+    border: none;
+    border-radius: 20px;
+    background: #d5dae1;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    flex-shrink: 0;
+}
+
+.student-toggle span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: block;
+    transition: 0.2s ease;
+}
+
+.student-toggle.enabled {
+    background: #7658d8;
+}
+
+.student-toggle.enabled span {
+    transform: translateX(18px);
+}
+
+.student-settings-select {
+    width: 155px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.student-settings-select select {
+    width: 100%;
+    height: 36px;
+    appearance: none;
+    border: 1px solid #dfe3e8;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #4d5663;
+    padding: 0 34px 0 11px;
+    font-size: 11.5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.student-settings-select select:focus {
+    border-color: #8c75d9;
+}
+
+.student-settings-select select:disabled {
+    background: #f4f5f7;
+    color: #a2a8b1;
+    cursor: not-allowed;
+}
+
+.student-settings-select svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #858d98;
+    pointer-events: none;
+}
+
+.student-password-form {
+    padding: 20px 22px 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.student-password-field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #535c68;
+}
+
+.student-password-field input {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #dfe3e8;
+    border-radius: 8px;
+    padding: 0 11px;
+    outline: none;
+    color: #303640;
+    font-size: 12px;
+    background: #ffffff;
+}
+
+.student-password-field input:focus {
+    border-color: #8c75d9;
+}
+
+.student-password-field input::placeholder {
+    color: #adb3bb;
+}
+
+.student-password-button {
+    height: 38px;
+    align-self: end;
+    border: none;
+    border-radius: 8px;
+    background: #7355d5;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-password-button:hover {
+    background: #6548c5;
+}
+
+.student-settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.student-settings-cancel,
+.student-settings-save {
+    height: 38px;
+    border-radius: 8px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.student-settings-cancel {
+    border: 1px solid #dfe3e8;
+    background: #ffffff;
+    color: #626b77;
+}
+
+.student-settings-cancel:hover {
+    background: #f7f8fa;
+}
+
+.student-settings-save {
+    border: none;
+    background: #7355d5;
+    color: #ffffff;
+}
+
+.student-settings-save:hover {
+    background: #6548c5;
+}
+
+@media (max-width: 850px) {
+    .student-settings-page {
+        padding: 24px 22px 35px;
+    }
+
+    .student-password-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .student-password-button {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 650px) {
+    .student-settings-page {
+        padding: 20px 15px 30px;
+    }
+
+    .student-settings-header h1 {
+        font-size: 22px;
+    }
+
+    .student-settings-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .student-theme-options,
+    .student-font-options {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .student-theme-options button,
+    .student-font-options button {
+        flex: 1;
+    }
+
+    .student-settings-select {
+        width: 100%;
+    }
+
+    .student-password-form {
+        grid-template-columns: 1fr;
+    }
+
+    .student-password-button {
+        grid-column: auto;
+    }
+
+    .student-settings-actions {
+        width: 100%;
+    }
+
+    .student-settings-cancel,
+    .student-settings-save {
+        flex: 1;
+    }
+}

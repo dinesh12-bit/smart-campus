@@ -1,0 +1,703 @@
+/* =========================================================
+   SENSORS PAGE
+========================================================= */
+
+.sensors-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 20px 22px 28px;
+    box-sizing: border-box;
+    background: #f5f7fb;
+    overflow: auto;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.sensors-toolbar {
+    width: 100%;
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.sensor-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #71809a;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.sensor-summary-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    color: #13a66a;
+}
+
+.sensor-summary-live i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #18b878;
+}
+
+.sensor-summary-total {
+    padding-left: 12px;
+    border-left: 1px solid #dce2ea;
+    color: #7d899e;
+}
+
+
+/* =========================================================
+   REFRESH BUTTON
+========================================================= */
+
+.sensors-refresh {
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+    padding: 0 13px;
+
+    border: 1px solid #dce3ed;
+    border-radius: 7px;
+
+    background: #ffffff;
+    color: #52627d;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 1px 3px rgba(30, 45, 75, 0.03);
+
+    transition:
+            background 0.18s ease,
+            border-color 0.18s ease,
+            color 0.18s ease;
+}
+
+.sensors-refresh:hover:not(:disabled) {
+    background: #f8faff;
+    border-color: #cbd5e3;
+    color: #6246e5;
+}
+
+.sensors-refresh:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.sensors-error {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 14px;
+    padding: 10px 12px;
+
+    border: 1px solid #ffd5d5;
+    border-radius: 7px;
+
+    background: #fff5f5;
+    color: #d83e46;
+
+    font-family: inherit;
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+.sensors-error button {
+    margin-left: auto;
+
+    padding: 4px 8px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background: transparent;
+    color: #d83e46;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.sensors-error button:hover {
+    background: #ffe9e9;
+}
+
+
+/* =========================================================
+   SENSOR GRID
+========================================================= */
+
+.sensors-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   ROOM CARD
+========================================================= */
+
+.sensor-room-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    border: 1px solid #dfe5ed;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow: 0 2px 8px rgba(30, 45, 75, 0.035);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.sensor-card-header {
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 14px 17px;
+
+    border-bottom: 1px solid #e9edf3;
+    box-sizing: border-box;
+}
+
+.sensor-card-header h2 {
+    max-width: 240px;
+
+    margin: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #142b55;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sensor-card-header > div:first-child > span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8995a9;
+
+    font-family: inherit;
+    font-size: 8px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   LIVE / OFFLINE
+========================================================= */
+
+.sensor-live-badge,
+.sensor-offline-badge {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    margin: 0 !important;
+    padding: 5px 7px;
+
+    border-radius: 5px;
+
+    font-family: inherit;
+    font-size: 7px !important;
+    font-weight: 700 !important;
+
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sensor-live-badge {
+    background: #e7f8f1;
+    color: #10a66a !important;
+}
+
+.sensor-offline-badge {
+    background: #f0f2f5;
+    color: #8a95a7 !important;
+}
+
+
+/* =========================================================
+   DATA SOURCE
+========================================================= */
+
+.sensor-source-row {
+    min-height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 0 15px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    background: #fcfdff;
+
+    box-sizing: border-box;
+}
+
+.sensor-source-row > span:first-child {
+    color: #929cad;
+
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.sensor-source-badge {
+    display: inline-flex !important;
+    align-items: center;
+
+    gap: 5px;
+
+    margin: 0 !important;
+    padding: 4px 7px;
+
+    border-radius: 5px;
+
+    font-family: inherit;
+    font-size: 7px !important;
+    font-weight: 700 !important;
+
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sensor-source-badge i {
+    width: 5px;
+    height: 5px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.sensor-source-badge.iot {
+    background: #e7f8f1;
+    color: #10a66a;
+}
+
+.sensor-source-badge.iot i {
+    background: #18b878;
+}
+
+.sensor-source-badge.simulated {
+    background: #fff5df;
+    color: #c58a16;
+}
+
+.sensor-source-badge.simulated i {
+    background: #e7ac18;
+}
+
+.sensor-source-badge.manual {
+    background: #f0f2f5;
+    color: #8a95a7;
+}
+
+.sensor-source-badge.manual i {
+    background: #9aa2b1;
+}
+
+
+/* =========================================================
+   SENSOR LIST
+========================================================= */
+
+.sensor-list {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 0;
+}
+
+
+/* =========================================================
+   SENSOR ITEM
+========================================================= */
+
+.sensor-item {
+    min-width: 0;
+    min-height: 86px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    box-sizing: border-box;
+}
+
+.sensor-item:nth-child(odd) {
+    border-right: 1px solid #edf0f4;
+}
+
+.sensor-item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   SENSOR ICON
+========================================================= */
+
+.sensor-item-icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 36px;
+
+    border-radius: 9px;
+}
+
+.temperature-sensor-icon {
+    background: #edf2ff;
+    color: #4d78ee;
+}
+
+.humidity-sensor-icon {
+    background: #edf4ff;
+    color: #4b77e7;
+}
+
+.motion-sensor-icon {
+    background: #edf8f3;
+    color: #18a96c;
+}
+
+.light-sensor-icon {
+    background: #fff7dc;
+    color: #e7ac18;
+}
+
+
+/* =========================================================
+   SENSOR INFO
+========================================================= */
+
+.sensor-item-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.sensor-item-info > span {
+    display: block;
+
+    margin: 0;
+
+    color: #7d899f;
+
+    font-family: inherit;
+    font-size: 8px;
+    line-height: 1.2;
+}
+
+.sensor-item-info > strong {
+    display: block;
+
+    margin: 4px 0 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #19335e;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sensor-item-info > small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #a0a9b8;
+
+    font-family: inherit;
+    font-size: 7px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   SENSOR STATE
+========================================================= */
+
+.sensor-state {
+    flex: 0 0 auto;
+
+    align-self: flex-start;
+
+    margin-top: 2px;
+    padding: 4px 5px;
+
+    border-radius: 4px;
+
+    font-family: inherit;
+    font-size: 6px;
+    font-weight: 700;
+
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.live-state {
+    background: #e9f8f2;
+    color: #13a66a;
+}
+
+.no-data-state {
+    background: #f0f2f5;
+    color: #929cad;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sensor-card-footer {
+    min-height: 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 0 15px;
+
+    background: #fafbfd;
+
+    box-sizing: border-box;
+}
+
+.sensor-card-footer span {
+    color: #939dad;
+
+    font-family: inherit;
+    font-size: 8px;
+}
+
+.sensor-card-footer strong {
+    color: #6d7a91;
+
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.sensors-empty {
+    width: 100%;
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border: 1px solid #e0e5ed;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #939dad;
+
+    font-family: inherit;
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+.sensors-empty strong {
+    color: #52617c;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.sensor-refresh-spin {
+    animation: sensor-spin 0.8s linear infinite;
+}
+
+@keyframes sensor-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .sensors-page {
+        padding: 18px;
+    }
+
+    .sensors-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .sensors-page {
+        padding: 14px;
+    }
+
+    .sensors-toolbar {
+        justify-content: flex-end;
+    }
+
+    .sensor-summary {
+        display: none;
+    }
+
+    .sensors-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sensor-list {
+        grid-template-columns: 1fr;
+    }
+
+    .sensor-item {
+        border-right: 0 !important;
+    }
+
+    .sensor-item:nth-last-child(-n + 2) {
+        border-bottom: 1px solid #edf0f4;
+    }
+
+    .sensor-item:last-child {
+        border-bottom: 0;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .sensors-page {
+        padding: 10px;
+    }
+
+    .sensors-refresh {
+        height: 36px;
+        padding: 0 11px;
+        font-size: 9px;
+    }
+
+    .sensor-card-header {
+        padding: 14px 12px;
+    }
+
+    .sensor-item {
+        padding: 12px;
+    }
+
+    .sensor-card-footer {
+        padding: 0 12px;
+    }
+
+    .sensor-source-row {
+        padding: 0 12px;
+    }
+}

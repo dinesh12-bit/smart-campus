@@ -1,0 +1,468 @@
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    width: 100%;
+    height: 100%;
+    min-height: 72px;
+
+    padding: 0 24px 0 30px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 100;
+}
+
+
+/* =========================
+   LEFT
+========================= */
+
+.topbar-left {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.topbar-left h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: normal;
+    word-spacing: normal;
+
+    white-space: nowrap;
+
+    font-family:
+            Inter,
+            "Segoe UI",
+            Arial,
+            sans-serif;
+
+    text-rendering: optimizeLegibility;
+}
+
+.topbar-menu {
+    display: none;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #e4e8ef;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #526078;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   RIGHT
+========================= */
+
+.topbar-right {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+/* =========================
+   USER WRAPPER
+========================= */
+
+.topbar-user-wrapper {
+    position: relative;
+}
+
+
+/* =========================
+   USER BUTTON
+========================= */
+
+.topbar-user {
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 7px 8px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.topbar-user:hover,
+.topbar-user.dropdown-open {
+    background: #f6f7fb;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+
+    border-radius: 50%;
+
+    background: #eee9ff;
+    color: #6844e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.user-details {
+    min-width: 0;
+    text-align: left;
+}
+
+.user-details strong {
+    display: block;
+
+    max-width: 145px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #273149;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+.user-details span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #8b94a7;
+
+    font-size: 9px;
+
+    line-height: 1.2;
+}
+
+.user-chevron {
+    color: #7c879b;
+
+    transition:
+            transform 0.2s ease;
+}
+
+.user-chevron.rotate {
+    transform: rotate(180deg);
+}
+
+
+/* =========================
+   CUSTOM DROPDOWN
+========================= */
+
+.topbar-dropdown {
+    position: absolute;
+
+    top: calc(100% + 9px);
+    right: 0;
+
+    width: 245px;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9f0;
+    border-radius: 13px;
+
+    box-shadow:
+            0 14px 35px rgba(15, 23, 42, 0.12),
+            0 3px 10px rgba(15, 23, 42, 0.05);
+
+    animation:
+            topbarDropdownIn 0.16s ease-out;
+
+    z-index: 500;
+}
+
+@keyframes topbarDropdownIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   DROPDOWN USER INFO
+========================= */
+
+.dropdown-user-info {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
+    background: #f7f8fc;
+}
+
+.dropdown-avatar {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #eee9ff;
+    color: #6844e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dropdown-user-info > div:last-child {
+    min-width: 0;
+}
+
+.dropdown-user-info strong {
+    display: block;
+
+    color: #263149;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-user-info span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8992a5;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.dropdown-divider {
+    height: 1px;
+
+    margin: 7px 3px;
+
+    background: #edf0f4;
+}
+
+
+/* =========================
+   DROPDOWN ITEM
+========================= */
+
+.dropdown-item {
+    width: 100%;
+    min-height: 40px;
+
+    padding: 6px 8px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #445066;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+            background 0.18s ease,
+            color 0.18s ease;
+}
+
+.dropdown-item:hover {
+    background: #f5f3ff;
+    color: #6844e8;
+}
+
+.dropdown-item-icon {
+    width: 31px;
+    height: 31px;
+
+    min-width: 31px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-icon {
+    background: #eef5ff;
+    color: #2563eb;
+}
+
+.settings-icon {
+    background: #f4f0ff;
+    color: #7c3aed;
+}
+
+.logout-icon {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.logout-item {
+    color: #d13a52;
+}
+
+.logout-item:hover {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .topbar {
+        padding: 0 18px;
+    }
+
+    .user-details strong {
+        max-width: 120px;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    .topbar {
+        min-height: 64px;
+        padding: 0 14px;
+    }
+
+    .topbar-left {
+        gap: 9px;
+    }
+
+    .topbar-left h1 {
+        font-size: 14px;
+        letter-spacing: normal;
+    }
+
+    .topbar-menu {
+        display: flex;
+    }
+
+    .user-details {
+        display: none;
+    }
+
+    .user-avatar {
+        width: 34px;
+        height: 34px;
+
+        min-width: 34px;
+    }
+
+    .topbar-user {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .topbar-dropdown {
+        width: 225px;
+        right: -4px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .topbar {
+        padding: 0 10px;
+    }
+
+    .topbar-dropdown {
+        width: 215px;
+        right: -5px;
+    }
+}

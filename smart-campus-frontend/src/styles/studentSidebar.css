@@ -1,0 +1,287 @@
+.student-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 275px;
+    height: 100vh;
+    height: 100dvh;
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a3b;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    z-index: 1000;
+
+    flex-shrink: 0;
+}
+
+/* Scrollbar */
+
+.student-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.student-sidebar::-webkit-scrollbar-track {
+    background: #111a3b;
+}
+
+.student-sidebar::-webkit-scrollbar-thumb {
+    background: #30395a;
+    border-radius: 10px;
+}
+
+/* Brand */
+
+.student-sidebar-brand {
+    width: 100%;
+    height: 104px;
+
+    padding: 0 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    flex-shrink: 0;
+}
+
+.student-sidebar-brand .student-logo {
+    width: 43px;
+    height: 43px;
+
+    min-width: 43px;
+    max-width: 43px;
+
+    object-fit: contain;
+    display: block;
+}
+
+.student-sidebar-brand span {
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+/* Menu Label */
+
+.student-menu-label {
+    width: 100%;
+
+    padding: 37px 20px 15px;
+
+    color: #8993b2;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: 0.4px;
+
+    text-align: center;
+}
+
+/* Navigation */
+
+.student-navigation {
+    width: 100%;
+
+    padding: 0 11px;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+/* Navigation Button */
+
+.student-nav-item {
+    width: 100%;
+    height: 47px;
+
+    margin: 0;
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #dbe0ef;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    transition:
+            background 0.2s ease,
+            color 0.2s ease;
+}
+
+.student-nav-item svg {
+    width: 17px;
+    height: 17px;
+
+    min-width: 17px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.8;
+}
+
+.student-nav-item span {
+    display: block;
+
+    margin: 0;
+    padding: 0;
+
+    color: inherit;
+
+    white-space: nowrap;
+}
+
+/* Hover */
+
+.student-nav-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+}
+
+/* Active */
+
+.student-nav-item.active {
+    background: linear-gradient(
+            135deg,
+            #7140ed,
+            #7541e8
+    );
+
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+.student-nav-item.active:hover {
+    background: linear-gradient(
+            135deg,
+            #7140ed,
+            #7541e8
+    );
+}
+
+/* Bottom */
+
+.student-sidebar-bottom {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding: 18px 11px 22px;
+
+    border-top: 1px solid rgba(
+            255,
+            255,
+            255,
+            0.08
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+.student-logout {
+    color: #d5d9e6;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) and (min-width: 761px) {
+
+    .student-sidebar {
+        width: 240px;
+    }
+
+    .student-sidebar-brand {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .student-sidebar-brand .student-logo {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        max-width: 38px;
+    }
+
+    .student-sidebar-brand span {
+        font-size: 17px;
+    }
+
+    .student-nav-item {
+        height: 44px;
+        font-size: 10px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+
+    .student-sidebar {
+        display: none !important;
+
+        width: 0 !important;
+        height: 0 !important;
+
+        min-width: 0 !important;
+        max-width: 0 !important;
+
+        min-height: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        visibility: hidden !important;
+
+        overflow: hidden !important;
+    }
+}

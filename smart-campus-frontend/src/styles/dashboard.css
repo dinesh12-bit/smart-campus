@@ -1,0 +1,736 @@
+/* =========================================================
+   DASHBOARD PAGE
+========================================================= */
+
+.dashboard-page {
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    padding: 22px 28px;
+
+    background: #f5f7fb;
+
+    overflow: auto;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.dashboard-error {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #ffd5d5;
+    border-radius: 8px;
+
+    background: #fff6f6;
+
+    color: #d53d3d;
+
+    font-size: 11px;
+}
+
+.dashboard-error button {
+    margin-left: auto;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #d53d3d;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   STAT GRID
+========================================================= */
+
+.stats-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.stat-card {
+    min-width: 0;
+
+    height: 150px;
+
+    padding: 18px;
+
+    border: 1px solid #e0e5ee;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow:
+            0 2px 8px rgba(30, 45, 75, 0.035);
+}
+
+
+/* =========================================================
+   STAT TOP
+========================================================= */
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   ICON BASE
+========================================================= */
+
+.stat-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+}
+
+
+/* =========================================================
+   TEMPERATURE ICON
+========================================================= */
+
+.temperature-stat .stat-icon {
+    background: #edf2ff;
+
+    color: #4c78ee;
+}
+
+
+/* =========================================================
+   HUMIDITY ICON
+========================================================= */
+
+.humidity-stat .stat-icon {
+    background: #edf4ff;
+
+    color: #4c78ee;
+}
+
+
+/* =========================================================
+   ACTIVE ROOM ICON
+========================================================= */
+
+.active-stat .stat-icon {
+    background: #f0efff;
+
+    color: #6754e9;
+}
+
+
+/* =========================================================
+   LIGHT ICON
+========================================================= */
+
+.light-stat .stat-icon {
+    background: #fff7dc;
+
+    color: #e9ad1b;
+}
+
+
+/* =========================================================
+   LIVE LABEL
+========================================================= */
+
+.live-label {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 5px 7px;
+
+    border-radius: 5px;
+
+    background: #e9f8f2;
+
+    color: #12a66b;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+}
+
+.live-label span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #15b979;
+}
+
+
+/* =========================================================
+   STAT CONTENT
+========================================================= */
+
+.stat-content {
+    margin-top: 18px;
+}
+
+.stat-content > span {
+    display: block;
+
+    color: #75819a;
+
+    font-size: 10px;
+}
+
+.stat-content > strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #122650;
+
+    font-size: 25px;
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.dashboard-main-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(300px, 0.85fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.temperature-card,
+.insights-card {
+    min-width: 0;
+
+    border: 1px solid #e0e5ee;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    box-shadow:
+            0 2px 8px rgba(30, 45, 75, 0.03);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.card-header {
+    min-height: 84px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 17px 18px;
+
+    border-bottom: 1px solid #e9edf3;
+}
+
+.card-header h2 {
+    margin: 0;
+
+    color: #14264b;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.card-header p {
+    margin: 6px 0 0;
+
+    color: #8792a8;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   REFRESH BUTTON
+========================================================= */
+
+.refresh-button {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e0e6ef;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #65738e;
+
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    background: #f6f8fc;
+
+    color: #4e68ce;
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart-wrapper {
+    width: 100%;
+    height: 260px;
+
+    padding: 14px 12px 0;
+}
+
+.empty-chart {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    color: #a0a9ba;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   CHART FOOTER
+========================================================= */
+
+.chart-footer {
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-top: 1px solid #eef1f5;
+
+    color: #8b96a9;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   AI INSIGHTS
+========================================================= */
+
+.insight-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.insight-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eef0ff;
+
+    color: #6251e9;
+}
+
+.ai-badge {
+    padding: 6px 8px;
+
+    border-radius: 5px;
+
+    background: #f0edff;
+
+    color: #654be7;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.insights-list {
+    padding: 14px;
+}
+
+.insight-item {
+    padding: 16px;
+
+    margin-bottom: 11px;
+
+    border: 1px solid #dfe5f1;
+    border-radius: 9px;
+
+    background: #fbfcff;
+}
+
+.insight-item:last-child {
+    margin-bottom: 0;
+}
+
+.insight-item h3 {
+    margin: 0;
+
+    color: #17305c;
+
+    text-align: center;
+
+    font-size: 10px;
+}
+
+.insight-item p {
+    margin: 12px 0;
+
+    color: #8793a9;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+.insight-item button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    margin: auto;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #6246e5;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LIVE CAMPUS STATUS
+========================================================= */
+
+.demo-section {
+    width: 100%;
+
+    padding: 18px;
+
+    border: 1px solid #e0e5ee;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow:
+            0 2px 8px rgba(30, 45, 75, 0.03);
+}
+
+.section-heading {
+    margin-bottom: 14px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: #14264b;
+
+    font-size: 13px;
+}
+
+.section-heading p {
+    margin: 5px 0 0;
+
+    color: #8994a9;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ACTIVITY GRID
+========================================================= */
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.activity-card {
+    padding: 15px;
+
+    border: 1px solid #e3e8f0;
+    border-radius: 8px;
+
+    background: #fbfcfe;
+}
+
+.activity-card > span {
+    display: block;
+
+    color: #75829a;
+
+    font-size: 9px;
+}
+
+.activity-card > strong {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #162b55;
+
+    font-size: 21px;
+}
+
+.activity-card small {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 7px;
+
+    font-size: 8px;
+}
+
+.success-text {
+    color: #16a76b;
+}
+
+.warning-text {
+    color: #e99a00;
+}
+
+.critical-text {
+    color: #ed4048;
+}
+
+
+/* =========================================================
+   RECENT ALERTS
+========================================================= */
+
+.recent-alerts {
+    margin-top: 15px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #e9edf3;
+}
+
+.recent-alerts h3 {
+    margin: 0;
+
+    color: #18305a;
+
+    font-size: 11px;
+}
+
+.recent-alerts > p {
+    margin: 5px 0 12px;
+
+    color: #8a95a9;
+
+    font-size: 9px;
+}
+
+.no-alerts {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 1px dashed #dce2eb;
+    border-radius: 7px;
+
+    color: #9aa4b5;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .dashboard-page {
+        padding: 18px;
+    }
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .dashboard-page {
+        padding: 14px;
+
+        overflow: auto;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .stat-card {
+        height: 135px;
+    }
+
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .chart-wrapper {
+        height: 230px;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-header {
+        min-height: 72px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .dashboard-page {
+        padding: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-content > strong {
+        font-size: 23px;
+    }
+
+    .chart-wrapper {
+        height: 210px;
+    }
+
+    .demo-section {
+        padding: 14px;
+    }
+
+}

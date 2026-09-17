@@ -1,0 +1,257 @@
+.technician-sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 255px;
+
+    background:
+            linear-gradient(
+                    180deg,
+                    #111b3c 0%,
+                    #101a39 55%,
+                    #101a37 100%
+            );
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 26px 12px 17px;
+
+    z-index: 100;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a98cff transparent;
+}
+
+.technician-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.technician-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.technician-sidebar::-webkit-scrollbar-thumb {
+    background: #a98cff;
+    border-radius: 999px;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.technician-sidebar-brand {
+    height: 67px;
+
+    padding: 0 17px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.technician-logo {
+    width: 43px;
+    height: 43px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+.technician-brand-text {
+    min-width: 0;
+}
+
+.technician-brand-text strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 19px;
+    font-weight: 750;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+.technician-brand-text span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #8390b5;
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   MENU LABEL
+========================= */
+
+.technician-menu-label {
+    margin-top: 31px;
+    margin-bottom: 15px;
+
+    padding-left: 84px;
+
+    color: #7886ae;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.technician-navigation {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.technician-nav-item {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 15px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #d5dcf0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 550;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            color 0.2s ease;
+}
+
+.technician-nav-item svg {
+    width: 18px;
+    min-width: 18px;
+
+    color: #aeb9d4;
+
+    stroke-width: 1.8;
+}
+
+.technician-nav-item:hover {
+    background: rgba(118, 67, 237, 0.16);
+
+    color: #ffffff;
+}
+
+.technician-nav-item:hover svg {
+    color: #c7b7ff;
+}
+
+.technician-nav-item.active {
+    background:
+            linear-gradient(
+                    90deg,
+                    #7440ed,
+                    #713de8
+            );
+
+    color: #ffffff;
+
+    box-shadow:
+            0 5px 13px rgba(95, 52, 211, 0.23);
+}
+
+.technician-nav-item.active svg {
+    color: #ffffff;
+}
+
+
+/* =========================
+   BOTTOM
+========================= */
+
+.technician-sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 17px;
+
+    border-top: 1px solid
+    rgba(255, 255, 255, 0.07);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.technician-logout {
+    color: #d5dcf0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .technician-sidebar {
+        width: 225px;
+    }
+
+    .technician-brand-text strong {
+        font-size: 17px;
+    }
+
+    .technician-nav-item {
+        height: 43px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .technician-sidebar {
+        position: fixed;
+
+        width: 245px;
+
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+    }
+}
