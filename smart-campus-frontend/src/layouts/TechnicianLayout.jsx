@@ -3,7 +3,7 @@ import {
     useLocation,
 } from "react-router-dom";
 
-import TechnicianSidebar from "../components/TechnicianSidebar";
+import TechnicianSidebar from "../components/technicianSidebar";
 
 import "../styles/technicianLayout.css";
 
