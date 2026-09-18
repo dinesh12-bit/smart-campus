@@ -1,27 +1,67 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+
+import {
+    Outlet,
+    useLocation,
+} from "react-router-dom";
+
+import {
+    Menu,
+} from "lucide-react";
+
 import StudentSidebar from "../components/StudentSidebar";
+
 import "../styles/studentLayout.css";
 
+
 function StudentLayout() {
+
     const location = useLocation();
+
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const isDashboard =
         location.pathname === "/student/dashboard";
 
-    const storage = sessionStorage.getItem("token")
-        ? sessionStorage
-        : localStorage;
+
+    const storage =
+        sessionStorage.getItem("token")
+            ? sessionStorage
+            : localStorage;
+
 
     const studentName =
-        storage.getItem("name") || "Student";
+        storage.getItem("name") ||
+        "Student";
+
 
     const studentInitial =
-        studentName.trim().charAt(0).toUpperCase() || "S";
+        studentName
+            .trim()
+            .charAt(0)
+            .toUpperCase() || "S";
+
 
     return (
         <div className="student-layout">
 
-            <StudentSidebar />
+            <StudentSidebar
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+            />
+
+
+            {/* MOBILE MENU BUTTON */}
+
+            <button
+                type="button"
+                className="student-mobile-menu"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open menu"
+            >
+                <Menu size={21} />
+            </button>
+
 
             <div className="student-main">
 
@@ -52,6 +92,7 @@ function StudentLayout() {
 
                     </header>
                 )}
+
 
                 <main
                     className={`student-page ${

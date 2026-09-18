@@ -1,3 +1,7 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -11,10 +15,15 @@ body,
     padding: 0;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     min-height: 100%;
     overflow-x: hidden;
 }
+
 
 /* =========================================================
    AUTH PAGE
@@ -26,40 +35,47 @@ body {
     min-height: 100dvh;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
 
-    padding: 16px;
+    margin: 0;
+    padding: 0;
 
     background: #f4f7fb;
 
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
+
 /* =========================================================
-   MAIN CARD
+   MAIN AUTH CARD
 ========================================================= */
 
 .auth-card {
-    width: min(1120px, 100%);
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
 
-    height: calc(100dvh - 32px);
-    max-height: 720px;
-    min-height: 0;
+    max-width: none;
+    max-height: none;
 
     display: grid;
     grid-template-columns: 42% 58%;
 
+    margin: 0;
+    padding: 0;
+
     background: #ffffff;
 
-    border: 1px solid #e2e7ef;
-    border-radius: 7px;
+    border: none;
+    border-radius: 0;
 
     overflow: hidden;
 
-    box-shadow:
-            0 12px 35px rgba(15, 35, 65, 0.10);
+    box-shadow: none;
 }
+
 
 /* =========================================================
    LEFT CAMPUS IMAGE
@@ -90,6 +106,11 @@ body {
             );
 }
 
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
 .visual-content {
     position: relative;
     z-index: 2;
@@ -102,6 +123,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 
 /* =========================================================
    LEFT HEADING
@@ -134,6 +156,11 @@ body {
     font-style: normal;
 }
 
+
+/* =========================================================
+   LEFT DESCRIPTION
+========================================================= */
+
 .visual-description {
     margin: 24px 0 0;
 
@@ -142,6 +169,7 @@ body {
     font-size: 17px;
     line-height: 1.55;
 }
+
 
 /* =========================================================
    FEATURES
@@ -197,6 +225,7 @@ body {
     font-size: 12px;
 }
 
+
 /* =========================================================
    LEFT FOOTER
 ========================================================= */
@@ -221,6 +250,7 @@ body {
     letter-spacing: 2px;
 }
 
+
 /* =========================================================
    RIGHT FORM SECTION
 ========================================================= */
@@ -238,8 +268,8 @@ body {
 
     background: #ffffff;
 
-    overflow-y: auto;
     overflow-x: hidden;
+    overflow-y: auto;
 
     scrollbar-width: none;
 }
@@ -248,12 +278,19 @@ body {
     display: none;
 }
 
+
+/* =========================================================
+   FORM CONTAINER
+========================================================= */
+
 .auth-form-container {
     width: min(440px, 100%);
-    max-height: 100%;
+
+    max-height: none;
 
     margin: 0 auto;
 }
+
 
 /* =========================================================
    BRAND
@@ -294,6 +331,7 @@ body {
     font-size: 14px;
 }
 
+
 /* =========================================================
    FORM HEADING
 ========================================================= */
@@ -320,13 +358,17 @@ body {
     color: #68758d;
 
     font-size: 13px;
+    line-height: 1.45;
 }
+
 
 /* =========================================================
    INPUT GROUP
 ========================================================= */
 
 .input-group {
+    width: 100%;
+
     margin-bottom: 15px;
 }
 
@@ -341,8 +383,9 @@ body {
     font-weight: 500;
 }
 
+
 /* =========================================================
-   INPUT
+   INPUT WRAPPER
 ========================================================= */
 
 .input-wrapper {
@@ -402,6 +445,7 @@ body {
     color: #9aa5b7;
 }
 
+
 /* =========================================================
    PASSWORD TOGGLE
 ========================================================= */
@@ -430,6 +474,7 @@ body {
 .password-toggle:hover {
     color: #135fc4;
 }
+
 
 /* =========================================================
    FORM OPTIONS
@@ -479,6 +524,7 @@ body {
     text-decoration: underline;
 }
 
+
 /* =========================================================
    AUTH BUTTON
 ========================================================= */
@@ -519,6 +565,7 @@ body {
     cursor: not-allowed;
 }
 
+
 /* =========================================================
    BOTTOM TEXT
 ========================================================= */
@@ -531,6 +578,7 @@ body {
     color: #68758d;
 
     font-size: 12px;
+    line-height: 1.5;
 }
 
 .auth-bottom-text a {
@@ -547,12 +595,15 @@ body {
     text-decoration: underline;
 }
 
+
 /* =========================================================
    ERROR / SUCCESS
 ========================================================= */
 
 .auth-error,
 .auth-success {
+    width: 100%;
+
     padding: 9px 12px;
 
     margin-bottom: 14px;
@@ -579,6 +630,7 @@ body {
     color: #24753b;
 }
 
+
 /* =========================================================
    REGISTER
 ========================================================= */
@@ -603,6 +655,18 @@ body {
     margin-top: 3px;
 }
 
+
+/* =========================================================
+   FORGOT / RESET PASSWORD
+========================================================= */
+
+.auth-form-container .auth-bottom-text a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 /* =========================================================
    TABLET
 ========================================================= */
@@ -610,26 +674,40 @@ body {
 @media (max-width: 900px) {
 
     .auth-page {
+        width: 100%;
+
         height: auto;
         min-height: 100dvh;
 
-        padding: 15px;
+        padding: 0;
 
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        overflow-x: hidden;
         overflow-y: auto;
     }
 
     .auth-card {
-        width: min(720px, 100%);
+        width: 100%;
 
         height: auto;
+        min-height: 100dvh;
+
+        max-width: none;
         max-height: none;
 
         grid-template-columns: 1fr;
 
-        overflow: hidden;
+        border: none;
+        border-radius: 0;
+
+        overflow: visible;
     }
 
     .auth-visual {
+        width: 100%;
+
         height: 320px;
         min-height: 320px;
     }
@@ -690,12 +768,23 @@ body {
     }
 
     .auth-form-section {
+        width: 100%;
+
         height: auto;
         min-height: 520px;
 
-        padding: 40px 40px;
+        padding: 40px;
+
+        overflow: visible;
+    }
+
+    .auth-form-container {
+        width: min(440px, 100%);
+
+        max-height: none;
     }
 }
+
 
 /* =========================================================
    MOBILE
@@ -705,6 +794,7 @@ body {
 
     .auth-page {
         width: 100%;
+
         height: auto;
         min-height: 100dvh;
 
@@ -713,28 +803,53 @@ body {
         align-items: flex-start;
         justify-content: flex-start;
 
+        position: relative;
+
+        overflow-x: hidden;
         overflow-y: auto;
     }
 
     .auth-card {
         width: 100%;
-        min-height: 100dvh;
 
         height: auto;
+        min-height: 100dvh;
+
+        max-width: none;
+        max-height: none;
+
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        grid-template-columns: 1fr;
 
         border: none;
         border-radius: 0;
 
         box-shadow: none;
+
+        position: relative;
+
+        overflow: visible;
     }
 
     .auth-visual {
+        width: 100%;
+
         height: 245px;
         min-height: 245px;
     }
 
     .visual-content {
+        width: 100%;
+        height: 100%;
+
         padding: 30px 24px 22px;
+    }
+
+    .visual-heading {
+        margin-top: 0;
     }
 
     .visual-heading span {
@@ -756,19 +871,32 @@ body {
         display: none;
     }
 
+    .visual-footer {
+        display: none;
+    }
+
     .auth-form-section {
         width: 100%;
+
         height: auto;
         min-height: 0;
 
         padding: 32px 23px 38px;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
 
         overflow: visible;
     }
 
     .auth-form-container {
         width: 100%;
+        max-width: 440px;
+
         max-height: none;
+
+        margin: 0 auto;
     }
 
     .brand {
@@ -798,25 +926,42 @@ body {
 
     .form-heading p {
         font-size: 12px;
+        line-height: 1.45;
     }
 
     .input-group {
         margin-bottom: 15px;
     }
 
+    .input-group label {
+        font-size: 12px;
+    }
+
     .input-wrapper {
         height: 46px;
+
+        padding: 0 12px;
+    }
+
+    .input-wrapper input {
+        font-size: 13px;
     }
 
     .form-options {
         font-size: 11px;
+
+        gap: 10px;
     }
 
     .auth-button {
         height: 46px;
+
+        font-size: 14px;
     }
 
     .auth-bottom-text {
+        margin-top: 18px;
+
         font-size: 12px;
     }
 
@@ -828,6 +973,7 @@ body {
         height: 46px;
     }
 }
+
 
 /* =========================================================
    SMALL MOBILE
@@ -844,36 +990,84 @@ body {
         padding: 25px 20px 20px;
     }
 
+    .visual-heading span {
+        font-size: 16px;
+    }
+
     .visual-heading strong {
         font-size: 28px;
+    }
+
+    .visual-description {
+        font-size: 12px;
     }
 
     .auth-form-section {
         padding: 28px 18px 34px;
     }
+
+    .brand {
+        margin-bottom: 20px;
+    }
+
+    .brand-logo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .brand h1 {
+        font-size: 21px;
+    }
+
+    .form-heading h2 {
+        font-size: 16px;
+    }
+
+    .input-wrapper {
+        height: 45px;
+    }
+
+    .auth-button {
+        height: 45px;
+    }
+}
+/* =========================================================
+   FINAL FULL SCREEN OVERRIDE
+========================================================= */
+
+html,
+body,
+#root {
+    width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .auth-page {
     width: 100vw !important;
+    min-width: 100vw !important;
+
     height: 100vh !important;
-    height: 100dvh !important;
+    min-height: 100vh !important;
 
     margin: 0 !important;
     padding: 0 !important;
 
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-
     display: flex !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
 
-    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
 }
 
 .auth-card {
     width: 100vw !important;
+    min-width: 100vw !important;
+
     height: 100vh !important;
-    height: 100dvh !important;
+    min-height: 100vh !important;
 
     max-width: none !important;
     max-height: none !important;
@@ -884,7 +1078,182 @@ body {
     border: none !important;
     border-radius: 0 !important;
 
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    box-shadow: none !important;
+
+    display: grid !important;
+    grid-template-columns: 42% 58% !important;
+
+    overflow: hidden !important;
+}
+
+
+/* =========================================================
+   DESKTOP FORM
+========================================================= */
+
+.auth-visual {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.auth-form-section {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 35px 70px !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.auth-form-container {
+    width: min(440px, 100%) !important;
+    max-width: 440px !important;
+
+    margin: 0 auto !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .auth-page {
+        width: 100vw !important;
+        min-width: 100vw !important;
+
+        height: auto !important;
+        min-height: 100vh !important;
+
+        padding: 0 !important;
+
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    .auth-card {
+        width: 100vw !important;
+        min-width: 100vw !important;
+
+        height: auto !important;
+        min-height: 100vh !important;
+
+        max-width: none !important;
+        max-height: none !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+
+        border: none !important;
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        overflow: visible !important;
+    }
+
+    .auth-visual {
+        width: 100% !important;
+
+        height: 320px !important;
+        min-height: 320px !important;
+    }
+
+    .auth-form-section {
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        padding: 40px !important;
+
+        overflow: visible !important;
+    }
+
+    .auth-form-container {
+        width: 100% !important;
+        max-width: 440px !important;
+
+        margin: 0 auto !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .auth-page {
+        width: 100vw !important;
+
+        height: auto !important;
+        min-height: 100vh !important;
+
+        padding: 0 !important;
+    }
+
+    .auth-card {
+        width: 100vw !important;
+
+        height: auto !important;
+        min-height: 100vh !important;
+
+        grid-template-columns: 1fr !important;
+
+        overflow: visible !important;
+    }
+
+    .auth-visual {
+        width: 100% !important;
+
+        height: 245px !important;
+        min-height: 245px !important;
+    }
+
+    .auth-form-section {
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        padding: 32px 23px 40px !important;
+
+        overflow: visible !important;
+    }
+
+    .auth-form-container {
+        width: 100% !important;
+        max-width: 440px !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .auth-visual {
+        height: 220px !important;
+        min-height: 220px !important;
+    }
+
+    .auth-form-section {
+        padding: 28px 18px 34px !important;
+    }
 }

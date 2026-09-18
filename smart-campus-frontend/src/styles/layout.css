@@ -31,6 +31,8 @@ body {
 .admin-layout {
     width: 100%;
     min-width: 0;
+
+    min-height: 100vh;
     min-height: 100dvh;
 
     margin: 0;
@@ -41,18 +43,18 @@ body {
 
 
 /* =========================================================
-   MAIN AREA
-   Sidebar is fixed, so main starts after sidebar.
+   ADMIN MAIN
 ========================================================= */
 
 .admin-main {
     width: calc(100% - 250px);
+
     min-width: 0;
 
+    min-height: 100vh;
     min-height: 100dvh;
 
     margin-left: 250px;
-    padding: 0;
 
     display: flex;
     flex-direction: column;
@@ -62,11 +64,12 @@ body {
 
 
 /* =========================================================
-   TOPBAR
+   ADMIN TOPBAR
 ========================================================= */
 
 .admin-topbar {
     width: 100%;
+
     height: 68px;
     min-height: 68px;
 
@@ -76,11 +79,17 @@ body {
     background: #ffffff;
 
     border-bottom: 1px solid #e6eaf1;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    z-index: 50;
 }
 
 
 /* =========================================================
-   PAGE
+   ADMIN PAGE
 ========================================================= */
 
 .admin-page {
@@ -95,6 +104,28 @@ body {
     background: #f5f7fb;
 
     overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a98cff transparent;
+}
+
+
+.admin-page::-webkit-scrollbar {
+    width: 5px;
+}
+
+.admin-page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-page::-webkit-scrollbar-thumb {
+    background: #a98cff;
+    border-radius: 999px;
+}
+
+.admin-page::-webkit-scrollbar-thumb:hover {
+    background: #8051ed;
 }
 
 
@@ -108,7 +139,6 @@ body {
         width: calc(100% - 230px);
         margin-left: 230px;
     }
-
 }
 
 
@@ -122,7 +152,6 @@ body {
         width: calc(100% - 210px);
         margin-left: 210px;
     }
-
 }
 
 
@@ -132,53 +161,149 @@ body {
 
 @media (max-width: 768px) {
 
-    .admin-main{
+    .admin-main {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        margin-left: 0 !important;
+
+        display: flex;
+        flex-direction: column;
+
+        background: #f5f7fb;
+
+        overflow: hidden;
+    }
+
+
+    /* TOPBAR */
+
+    .admin-topbar {
+        width: 100% !important;
+
+        height: 70px !important;
+        min-height: 70px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #e8edf5;
+
+        flex-shrink: 0;
+
         position: relative;
 
-        width: calc(100vw - 250px);
-        margin-left:250px;
-
-        height:100dvh;
-
-        display:flex;
-        flex-direction:column;
-
-        background:#f5f7fb;
-
-        overflow:hidden;
+        z-index: 50;
     }
 
-    .admin-topbar{
-        width:100%;
-        height:70px;
-        flex-shrink:0;
 
-        background:#fff;
-        border-bottom:1px solid #e8edf5;
+    /* PAGE */
 
-        z-index:100;
+    .admin-page {
+        width: 100% !important;
+
+        min-width: 0;
+
+        min-height: 0;
+
+        flex: 1;
+
+        padding: 16px !important;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        background: #f5f7fb;
     }
 
-    .admin-page{
-        flex:1;
 
-        width:100%;
-        overflow:auto;
+    /*
+       FORCE TOPBAR HAMBURGER
+    */
 
-        padding:24px;
-        background:#f5f7fb;
+    .admin-topbar .topbar-menu {
+        display: flex !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        position: relative !important;
+
+        width: 38px !important;
+        height: 38px !important;
+
+        min-width: 38px !important;
+        min-height: 38px !important;
+
+        padding: 0 !important;
+        margin: 0 !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        flex-shrink: 0 !important;
+
+        border: 1px solid #e4e8ef !important;
+
+        border-radius: 9px !important;
+
+        background: #ffffff !important;
+
+        color: #526078 !important;
+
+        cursor: pointer !important;
+
+        z-index: 9999 !important;
     }
 
-    @media (max-width:768px){
 
-        .admin-main{
-            width:100%;
-            margin-left:0;
-        }
+    .admin-topbar .topbar-menu svg {
+        display: block !important;
 
-        .admin-page{
-            padding:16px;
-        }
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        width: 19px !important;
+        height: 19px !important;
     }
 
+
+    .admin-topbar .topbar-menu:hover {
+        color: #7042ed !important;
+
+        background: #faf9ff !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .admin-topbar {
+        height: 64px !important;
+        min-height: 64px !important;
+    }
+
+
+    .admin-page {
+        padding: 13px !important;
+    }
+
+
+    .admin-topbar .topbar-menu {
+        width: 38px !important;
+        height: 38px !important;
+
+        min-width: 38px !important;
+    }
 }

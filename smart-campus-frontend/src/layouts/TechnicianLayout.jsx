@@ -1,28 +1,40 @@
+import { useState } from "react";
+
 import {
     Outlet,
     useLocation,
 } from "react-router-dom";
 
+import {
+    Menu,
+} from "lucide-react";
+
 import TechnicianSidebar from "../components/technicianSidebar";
 
 import "../styles/technicianLayout.css";
 
+
 function TechnicianLayout() {
+
     const location = useLocation();
 
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     const isDashboard =
-        location.pathname ===
-        "/technician/dashboard";
+        location.pathname === "/technician/dashboard";
+
 
     const storage =
         sessionStorage.getItem("token")
             ? sessionStorage
             : localStorage;
 
+
     const technicianName =
         storage.getItem("name") ||
         storage.getItem("username") ||
         "Technician";
+
 
     const technicianInitial =
         technicianName
@@ -30,10 +42,25 @@ function TechnicianLayout() {
             .charAt(0)
             .toUpperCase() || "T";
 
+
     return (
         <div className="technician-layout">
 
-            <TechnicianSidebar />
+            <TechnicianSidebar
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+            />
+
+
+            <button
+                type="button"
+                className="technician-mobile-menu"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open menu"
+            >
+                <Menu size={21} />
+            </button>
+
 
             <div className="technician-main">
 
@@ -64,6 +91,7 @@ function TechnicianLayout() {
 
                     </header>
                 )}
+
 
                 <main
                     className={`technician-page ${

@@ -1,3 +1,7 @@
+/* =========================
+   SIDEBAR
+========================= */
+
 .technician-sidebar {
     position: fixed;
 
@@ -18,29 +22,36 @@
     color: #ffffff;
 
     display: flex;
+
     flex-direction: column;
 
     padding: 26px 12px 17px;
 
-    z-index: 100;
+    z-index: 1100;
 
     overflow-y: auto;
+
     overflow-x: hidden;
 
     scrollbar-width: thin;
+
     scrollbar-color: #a98cff transparent;
 }
+
 
 .technician-sidebar::-webkit-scrollbar {
     width: 5px;
 }
 
+
 .technician-sidebar::-webkit-scrollbar-track {
     background: transparent;
 }
 
+
 .technician-sidebar::-webkit-scrollbar-thumb {
     background: #a98cff;
+
     border-radius: 999px;
 }
 
@@ -55,10 +66,12 @@
     padding: 0 17px;
 
     display: flex;
+
     align-items: center;
 
     gap: 11px;
 }
+
 
 .technician-logo {
     width: 43px;
@@ -69,9 +82,11 @@
     flex-shrink: 0;
 }
 
+
 .technician-brand-text {
     min-width: 0;
 }
+
 
 .technician-brand-text strong {
     display: block;
@@ -79,12 +94,14 @@
     color: #ffffff;
 
     font-size: 19px;
+
     font-weight: 750;
 
     line-height: 1.1;
 
     white-space: nowrap;
 }
+
 
 .technician-brand-text span {
     display: block;
@@ -105,6 +122,7 @@
 
 .technician-menu-label {
     margin-top: 31px;
+
     margin-bottom: 15px;
 
     padding-left: 84px;
@@ -112,6 +130,7 @@
     color: #7886ae;
 
     font-size: 9px;
+
     font-weight: 700;
 
     letter-spacing: 1px;
@@ -124,18 +143,22 @@
 
 .technician-navigation {
     display: flex;
+
     flex-direction: column;
 
     gap: 5px;
 }
 
+
 .technician-nav-item {
     width: 100%;
+
     height: 46px;
 
     padding: 0 15px;
 
     border: none;
+
     outline: none;
 
     border-radius: 7px;
@@ -145,6 +168,7 @@
     color: #d5dcf0;
 
     display: flex;
+
     align-items: center;
 
     gap: 14px;
@@ -152,6 +176,7 @@
     font-family: inherit;
 
     font-size: 12px;
+
     font-weight: 550;
 
     text-align: left;
@@ -163,8 +188,10 @@
             color 0.2s ease;
 }
 
+
 .technician-nav-item svg {
     width: 18px;
+
     min-width: 18px;
 
     color: #aeb9d4;
@@ -172,15 +199,18 @@
     stroke-width: 1.8;
 }
 
+
 .technician-nav-item:hover {
     background: rgba(118, 67, 237, 0.16);
 
     color: #ffffff;
 }
 
+
 .technician-nav-item:hover svg {
     color: #c7b7ff;
 }
+
 
 .technician-nav-item.active {
     background:
@@ -196,6 +226,7 @@
             0 5px 13px rgba(95, 52, 211, 0.23);
 }
 
+
 .technician-nav-item.active svg {
     color: #ffffff;
 }
@@ -210,14 +241,17 @@
 
     padding-top: 17px;
 
-    border-top: 1px solid
-    rgba(255, 255, 255, 0.07);
+    border-top:
+            1px solid
+            rgba(255, 255, 255, 0.07);
 
     display: flex;
+
     flex-direction: column;
 
     gap: 4px;
 }
+
 
 .technician-logout {
     color: #d5dcf0;
@@ -225,7 +259,71 @@
 
 
 /* =========================
-   MOBILE
+   CLOSE BUTTON
+========================= */
+
+.technician-sidebar-close {
+    display: none;
+
+    position: absolute;
+
+    top: 17px;
+    right: 15px;
+
+    width: 34px;
+    height: 34px;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+
+.technician-sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.technician-sidebar-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+            opacity 0.25s ease,
+            visibility 0.25s ease;
+
+    z-index: 1050;
+}
+
+
+/* =========================
+   TABLET
 ========================= */
 
 @media (max-width: 900px) {
@@ -234,24 +332,74 @@
         width: 225px;
     }
 
+
     .technician-brand-text strong {
         font-size: 17px;
     }
+
 
     .technician-nav-item {
         height: 43px;
     }
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 700px) {
 
     .technician-sidebar {
-        position: fixed;
+        position: fixed !important;
 
-        width: 245px;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: auto !important;
 
-        transform: translateX(-100%);
+        width: 255px !important;
 
-        transition: transform 0.25s ease;
+        height: 100dvh !important;
+
+        min-height: 100dvh !important;
+
+        margin: 0 !important;
+
+        transform: translateX(-100%) !important;
+
+        transition:
+                transform 0.25s ease !important;
+
+        z-index: 1100 !important;
+
+        overflow-y: auto;
+
+        overflow-x: hidden;
+    }
+
+
+    .technician-sidebar.mobile-open {
+        transform: translateX(0) !important;
+    }
+
+
+    .technician-sidebar-close {
+        display: flex !important;
+    }
+
+
+    .technician-sidebar-overlay {
+        display: block !important;
+
+        opacity: 0;
+
+        visibility: hidden;
+    }
+
+
+    .technician-sidebar-overlay.show {
+        opacity: 1 !important;
+
+        visibility: visible !important;
     }
 }

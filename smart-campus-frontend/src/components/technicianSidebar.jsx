@@ -5,6 +5,7 @@ import {
     UserRound,
     Settings,
     LogOut,
+    X,
 } from "lucide-react";
 
 import {
@@ -16,197 +17,276 @@ import logo from "../assets/images/smart-campus-logo.png";
 
 import "../styles/technicianSidebar.css";
 
-function TechnicianSidebar() {
+
+function TechnicianSidebar({
+                               isOpen = false,
+                               onClose = () => {},
+                           }) {
+
     const location = useLocation();
     const navigate = useNavigate();
+
 
     const isActive = (path) => {
         return location.pathname === path;
     };
 
+
+    const handleNavigation = (path) => {
+
+        navigate(path);
+
+        onClose();
+    };
+
+
     const handleLogout = () => {
+
         sessionStorage.clear();
         localStorage.clear();
+
+        onClose();
 
         navigate("/login", {
             replace: true,
         });
     };
 
+
     return (
-        <aside className="technician-sidebar">
+        <>
 
-            {/* =========================
-                BRAND
-            ========================= */}
+            {/* MOBILE OVERLAY */}
 
-            <div className="technician-sidebar-brand">
-
-                <img
-                    src={logo}
-                    alt="Smart Campus"
-                    className="technician-logo"
-                />
-
-                <div className="technician-brand-text">
-                    <strong>
-                        Smart Campus
-                    </strong>
-
-                    <span>
-                        Resource Management
-                    </span>
-                </div>
-
-            </div>
+            <div
+                className={`technician-sidebar-overlay ${
+                    isOpen ? "show" : ""
+                }`}
+                onClick={onClose}
+                aria-hidden="true"
+            />
 
 
-            {/* =========================
-                MAIN MENU
-            ========================= */}
+            {/* SIDEBAR */}
 
-            <div className="technician-menu-label">
-                MAIN MENU
-            </div>
+            <aside
+                className={`technician-sidebar ${
+                    isOpen ? "mobile-open" : ""
+                }`}
+            >
 
-            <nav className="technician-navigation">
+                {/* MOBILE CLOSE BUTTON */}
 
                 <button
                     type="button"
-                    className={`technician-nav-item ${
-                        isActive(
-                            "/technician/dashboard"
-                        )
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={() =>
-                        navigate(
-                            "/technician/dashboard"
-                        )
-                    }
+                    className="technician-sidebar-close"
+                    onClick={onClose}
+                    aria-label="Close sidebar"
                 >
-                    <LayoutDashboard size={18} />
-
-                    <span>
-                        Dashboard
-                    </span>
+                    <X size={21} />
                 </button>
 
 
-                <button
-                    type="button"
-                    className={`technician-nav-item ${
-                        isActive(
-                            "/technician/tasks"
-                        )
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={() =>
-                        navigate(
-                            "/technician/tasks"
-                        )
-                    }
-                >
-                    <ClipboardList size={18} />
+                {/* BRAND */}
 
-                    <span>
-                        My Tasks
-                    </span>
-                </button>
+                <div className="technician-sidebar-brand">
 
-
-                <button
-                    type="button"
-                    className={`technician-nav-item ${
-                        isActive(
-                            "/technician/complaints"
-                        )
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={() =>
-                        navigate(
-                            "/technician/complaints"
-                        )
-                    }
-                >
-                    <MessageSquareText
-                        size={18}
+                    <img
+                        src={logo}
+                        alt="Smart Campus"
+                        className="technician-logo"
                     />
 
-                    <span>
-                        Complaints
-                    </span>
-                </button>
+                    <div className="technician-brand-text">
+
+                        <strong>
+                            Smart Campus
+                        </strong>
+
+                        <span>
+                            Resource Management
+                        </span>
+
+                    </div>
+
+                </div>
 
 
-                <button
-                    type="button"
-                    className={`technician-nav-item ${
-                        isActive(
-                            "/technician/profile"
-                        )
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={() =>
-                        navigate(
-                            "/technician/profile"
-                        )
-                    }
-                >
-                    <UserRound size={18} />
+                {/* MENU LABEL */}
 
-                    <span>
-                        Profile
-                    </span>
-                </button>
-
-            </nav>
+                <div className="technician-menu-label">
+                    MAIN MENU
+                </div>
 
 
-            {/* =========================
-                BOTTOM
-            ========================= */}
+                {/* NAVIGATION */}
 
-            <div className="technician-sidebar-bottom">
+                <nav className="technician-navigation">
 
-                <button
-                    type="button"
-                    className={`technician-nav-item ${
-                        isActive("/technician/settings")
-                            ? "active"
-                            : ""
-                    }`}
-                    onClick={() =>
-                        navigate("/technician/settings")
-                    }
-                >
-                    <Settings size={18} />
+                    {/* DASHBOARD */}
 
-                    <span>
-        Settings
-    </span>
-                </button>
+                    <button
+                        type="button"
+                        className={`technician-nav-item ${
+                            isActive(
+                                "/technician/dashboard"
+                            )
+                                ? "active"
+                                : ""
+                        }`}
+                        onClick={() =>
+                            handleNavigation(
+                                "/technician/dashboard"
+                            )
+                        }
+                    >
+
+                        <LayoutDashboard size={18} />
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </button>
 
 
-                <button
-                    type="button"
-                    className="technician-nav-item technician-logout"
-                    onClick={handleLogout}
-                >
-                    <LogOut size={18} />
+                    {/* MY TASKS */}
 
-                    <span>
-                        Logout
-                    </span>
-                </button>
+                    <button
+                        type="button"
+                        className={`technician-nav-item ${
+                            isActive(
+                                "/technician/tasks"
+                            )
+                                ? "active"
+                                : ""
+                        }`}
+                        onClick={() =>
+                            handleNavigation(
+                                "/technician/tasks"
+                            )
+                        }
+                    >
 
-            </div>
+                        <ClipboardList size={18} />
 
-        </aside>
+                        <span>
+                            My Tasks
+                        </span>
+
+                    </button>
+
+
+                    {/* COMPLAINTS */}
+
+                    <button
+                        type="button"
+                        className={`technician-nav-item ${
+                            isActive(
+                                "/technician/complaints"
+                            )
+                                ? "active"
+                                : ""
+                        }`}
+                        onClick={() =>
+                            handleNavigation(
+                                "/technician/complaints"
+                            )
+                        }
+                    >
+
+                        <MessageSquareText
+                            size={18}
+                        />
+
+                        <span>
+                            Complaints
+                        </span>
+
+                    </button>
+
+
+                    {/* PROFILE */}
+
+                    <button
+                        type="button"
+                        className={`technician-nav-item ${
+                            isActive(
+                                "/technician/profile"
+                            )
+                                ? "active"
+                                : ""
+                        }`}
+                        onClick={() =>
+                            handleNavigation(
+                                "/technician/profile"
+                            )
+                        }
+                    >
+
+                        <UserRound size={18} />
+
+                        <span>
+                            Profile
+                        </span>
+
+                    </button>
+
+                </nav>
+
+
+                {/* BOTTOM */}
+
+                <div className="technician-sidebar-bottom">
+
+                    {/* SETTINGS */}
+
+                    <button
+                        type="button"
+                        className={`technician-nav-item ${
+                            isActive(
+                                "/technician/settings"
+                            )
+                                ? "active"
+                                : ""
+                        }`}
+                        onClick={() =>
+                            handleNavigation(
+                                "/technician/settings"
+                            )
+                        }
+                    >
+
+                        <Settings size={18} />
+
+                        <span>
+                            Settings
+                        </span>
+
+                    </button>
+
+
+                    {/* LOGOUT */}
+
+                    <button
+                        type="button"
+                        className="technician-nav-item technician-logout"
+                        onClick={handleLogout}
+                    >
+
+                        <LogOut size={18} />
+
+                        <span>
+                            Logout
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </aside>
+
+        </>
     );
 }
 

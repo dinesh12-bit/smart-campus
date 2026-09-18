@@ -5,15 +5,27 @@ import {
     Settings,
     LogOut,
 } from "lucide-react";
+
 import {
     useLocation,
     useNavigate,
 } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+
+import {
+    useEffect,
+    useRef,
+    useState,
+} from "react";
+
 import "../styles/topbar.css";
 
+
 function getPageTitle(pathname) {
-    if (pathname === "/admin" || pathname === "/admin/") {
+
+    if (
+        pathname === "/admin" ||
+        pathname === "/admin/"
+    ) {
         return "Dashboard";
     }
 
@@ -21,7 +33,11 @@ function getPageTitle(pathname) {
         return "Rooms";
     }
 
-    if (pathname.startsWith("/admin/live-monitoring")) {
+    if (
+        pathname.startsWith(
+            "/admin/live-monitoring"
+        )
+    ) {
         return "Live Monitoring";
     }
 
@@ -29,19 +45,27 @@ function getPageTitle(pathname) {
         return "Sensors";
     }
 
-    if (pathname.startsWith("/admin/complaints")) {
+    if (
+        pathname.startsWith("/admin/complaints")
+    ) {
         return "Complaints";
     }
 
-    if (pathname.startsWith("/admin/ai-insights")) {
+    if (
+        pathname.startsWith("/admin/ai-insights")
+    ) {
         return "AI Insights";
     }
 
-    if (pathname.startsWith("/admin/predictions")) {
+    if (
+        pathname.startsWith("/admin/predictions")
+    ) {
         return "Predictions";
     }
 
-    if (pathname.startsWith("/admin/analytics")) {
+    if (
+        pathname.startsWith("/admin/analytics")
+    ) {
         return "Analytics";
     }
 
@@ -53,40 +77,58 @@ function getPageTitle(pathname) {
         return "Reports";
     }
 
-    if (pathname.startsWith("/admin/settings")) {
+    if (
+        pathname.startsWith("/admin/settings")
+    ) {
         return "Settings";
     }
 
-    if (pathname.startsWith("/admin/profile")) {
+    if (
+        pathname.startsWith("/admin/profile")
+    ) {
         return "Profile";
     }
 
     return "Dashboard";
 }
 
-function Topbar() {
+
+function Topbar({
+                    onMenuClick = () => {},
+                }) {
+
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [
+        dropdownOpen,
+        setDropdownOpen,
+    ] = useState(false);
 
     const dropdownRef = useRef(null);
+
 
     const storage =
         sessionStorage.getItem("token")
             ? sessionStorage
             : localStorage;
 
+
     const adminName =
-        storage.getItem("name") || "System Admin";
+        storage.getItem("name") ||
+        "System Admin";
+
 
     const adminEmail =
-        storage.getItem("email") || "admin@smartcampus.com";
+        storage.getItem("email") ||
+        "admin@smartcampus.com";
 
-    const adminRole =
-        storage.getItem("role") || "ADMIN";
 
-    const pageTitle = getPageTitle(location.pathname);
+    const pageTitle =
+        getPageTitle(
+            location.pathname
+        );
+
 
     const adminInitial =
         adminName
@@ -94,20 +136,27 @@ function Topbar() {
             .charAt(0)
             .toUpperCase() || "A";
 
+
     useEffect(() => {
+
         const handleOutsideClick = (event) => {
+
             if (
                 dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
+                !dropdownRef.current.contains(
+                    event.target
+                )
             ) {
                 setDropdownOpen(false);
             }
         };
 
+
         document.addEventListener(
             "mousedown",
             handleOutsideClick
         );
+
 
         return () => {
             document.removeEventListener(
@@ -115,39 +164,38 @@ function Topbar() {
                 handleOutsideClick
             );
         };
+
     }, []);
 
+
     const handleProfile = () => {
+
         setDropdownOpen(false);
+
         navigate("/admin/profile");
     };
 
+
     const handleSettings = () => {
+
         setDropdownOpen(false);
+
         navigate("/admin/settings");
     };
 
+
     const handleLogout = () => {
+
         setDropdownOpen(false);
 
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("userId");
-        sessionStorage.removeItem("name");
-        sessionStorage.removeItem("username");
-        sessionStorage.removeItem("email");
-        sessionStorage.removeItem("role");
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("name");
-        localStorage.removeItem("username");
-        localStorage.removeItem("email");
-        localStorage.removeItem("role");
+        sessionStorage.clear();
+        localStorage.clear();
 
         navigate("/login", {
             replace: true,
         });
     };
+
 
     return (
         <div className="topbar">
@@ -157,22 +205,28 @@ function Topbar() {
             <div className="topbar-left">
 
                 <button
-                    className="topbar-menu"
                     type="button"
-                    aria-label="Open menu"
+                    className="topbar-menu"
+                    onClick={onMenuClick}
+                    aria-label="Open sidebar"
                 >
-                    <Menu size={19} />
+                    <Menu
+                        size={19}
+                        strokeWidth={2}
+                    />
                 </button>
 
-                <h1>{pageTitle}</h1>
+
+                <h1>
+                    {pageTitle}
+                </h1>
 
             </div>
+
 
             {/* RIGHT */}
 
             <div className="topbar-right">
-
-                {/* Admin Profile */}
 
                 <div
                     className="topbar-user-wrapper"
@@ -188,15 +242,19 @@ function Topbar() {
                         }`}
                         onClick={() =>
                             setDropdownOpen(
-                                (previous) => !previous
+                                previous =>
+                                    !previous
                             )
                         }
-                        aria-expanded={dropdownOpen}
+                        aria-expanded={
+                            dropdownOpen
+                        }
                     >
 
                         <div className="user-avatar">
                             {adminInitial}
                         </div>
+
 
                         <div className="user-details">
 
@@ -210,6 +268,7 @@ function Topbar() {
 
                         </div>
 
+
                         <ChevronDown
                             size={17}
                             className={`user-chevron ${
@@ -221,9 +280,9 @@ function Topbar() {
 
                     </button>
 
-                    {/* CUSTOM DROPDOWN */}
 
                     {dropdownOpen && (
+
                         <div className="topbar-dropdown">
 
                             <div className="dropdown-user-info">
@@ -233,6 +292,7 @@ function Topbar() {
                                 </div>
 
                                 <div>
+
                                     <strong>
                                         {adminName}
                                     </strong>
@@ -240,19 +300,26 @@ function Topbar() {
                                     <span>
                                         {adminEmail}
                                     </span>
+
                                 </div>
 
                             </div>
 
+
                             <div className="dropdown-divider" />
+
 
                             <button
                                 type="button"
                                 className="dropdown-item"
-                                onClick={handleProfile}
+                                onClick={
+                                    handleProfile
+                                }
                             >
                                 <span className="dropdown-item-icon profile-icon">
-                                    <UserRound size={16} />
+                                    <UserRound
+                                        size={16}
+                                    />
                                 </span>
 
                                 <span>
@@ -260,13 +327,18 @@ function Topbar() {
                                 </span>
                             </button>
 
+
                             <button
                                 type="button"
                                 className="dropdown-item"
-                                onClick={handleSettings}
+                                onClick={
+                                    handleSettings
+                                }
                             >
                                 <span className="dropdown-item-icon settings-icon">
-                                    <Settings size={16} />
+                                    <Settings
+                                        size={16}
+                                    />
                                 </span>
 
                                 <span>
@@ -274,15 +346,21 @@ function Topbar() {
                                 </span>
                             </button>
 
+
                             <div className="dropdown-divider" />
+
 
                             <button
                                 type="button"
                                 className="dropdown-item logout-item"
-                                onClick={handleLogout}
+                                onClick={
+                                    handleLogout
+                                }
                             >
                                 <span className="dropdown-item-icon logout-icon">
-                                    <LogOut size={16} />
+                                    <LogOut
+                                        size={16}
+                                    />
                                 </span>
 
                                 <span>
@@ -291,6 +369,7 @@ function Topbar() {
                             </button>
 
                         </div>
+
                     )}
 
                 </div>

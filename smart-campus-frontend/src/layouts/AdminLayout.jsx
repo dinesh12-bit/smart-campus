@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
@@ -5,22 +6,34 @@ import Topbar from "../components/Topbar";
 
 import "../styles/layout.css";
 
+
 function AdminLayout() {
+
+    const [sidebarOpen, setSidebarOpen] =
+        useState(false);
+
     return (
         <div className="admin-layout">
 
-            {/* SIDEBAR */}
-            <Sidebar />
+            <Sidebar
+                isOpen={sidebarOpen}
+                onClose={() =>
+                    setSidebarOpen(false)
+                }
+            />
 
-            {/* RIGHT SIDE */}
             <div className="admin-main">
 
-                {/* TOPBAR */}
                 <header className="admin-topbar">
-                    <Topbar />
+
+                    <Topbar
+                        onMenuClick={() =>
+                            setSidebarOpen(true)
+                        }
+                    />
+
                 </header>
 
-                {/* PAGE */}
                 <main className="admin-page">
                     <Outlet />
                 </main>

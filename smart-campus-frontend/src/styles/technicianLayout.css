@@ -4,7 +4,7 @@
 
 
 /* =========================
-   GLOBAL TECHNICIAN SCROLLBAR
+   GLOBAL SCROLLBAR
 ========================= */
 
 html {
@@ -37,6 +37,7 @@ html {
 
 .technician-layout {
     width: 100%;
+
     min-height: 100vh;
     min-height: 100dvh;
 
@@ -49,6 +50,7 @@ html {
     scrollbar-width: thin;
     scrollbar-color: #a98cff transparent;
 }
+
 
 .technician-main {
     width: calc(100% - 255px);
@@ -88,24 +90,30 @@ html {
     justify-content: space-between;
 
     border: none;
+
     box-shadow: none;
 
     position: sticky;
+
     top: 0;
 
     z-index: 30;
 }
 
+
 .technician-topbar-spacer {
     flex: 1;
 }
 
+
 .technician-topbar-user {
     display: flex;
+
     align-items: center;
 
     gap: 10px;
 }
+
 
 .technician-topbar-avatar {
     width: 39px;
@@ -120,12 +128,15 @@ html {
     color: #7042ed;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     font-size: 13px;
+
     font-weight: 700;
 }
+
 
 .technician-topbar-details strong {
     display: block;
@@ -133,14 +144,18 @@ html {
     max-width: 160px;
 
     overflow: hidden;
+
     text-overflow: ellipsis;
+
     white-space: nowrap;
 
     color: #25334d;
 
     font-size: 11px;
+
     font-weight: 700;
 }
+
 
 .technician-topbar-details span {
     display: block;
@@ -159,6 +174,7 @@ html {
 
 .technician-page {
     width: 100%;
+
     min-width: 0;
 
     flex: 1;
@@ -168,11 +184,14 @@ html {
     background: #ffffff;
 
     overflow-x: hidden;
+
     overflow-y: auto;
 
     scrollbar-width: thin;
+
     scrollbar-color: #a98cff transparent;
 }
+
 
 .technician-page-no-topbar {
     padding-top: 30px;
@@ -182,7 +201,51 @@ html {
 
 
 /* =========================
-   MOBILE
+   MOBILE MENU BUTTON
+========================= */
+
+.technician-mobile-menu {
+    display: none;
+
+    position: fixed;
+
+    top: 15px;
+    left: 15px;
+
+    width: 42px;
+    height: 42px;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #25334d;
+
+    cursor: pointer;
+
+    box-shadow:
+            0 4px 14px rgba(15, 23, 42, 0.08);
+
+    z-index: 1000;
+}
+
+
+.technician-mobile-menu:hover {
+    color: #7042ed;
+
+    background: #faf9ff;
+}
+
+
+/* =========================
+   TABLET
 ========================= */
 
 @media (max-width: 900px) {
@@ -193,20 +256,60 @@ html {
         margin-left: 225px;
     }
 
+
     .technician-page {
         padding: 24px 22px 28px;
     }
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 700px) {
 
     .technician-main {
-        width: 100%;
+        width: 100% !important;
 
-        margin-left: 0;
+        margin-left: 0 !important;
+
+        min-height: 100dvh;
     }
 
+
+    .technician-mobile-menu {
+        display: flex !important;
+
+        position: fixed !important;
+
+        top: 15px !important;
+        left: 15px !important;
+
+        width: 42px !important;
+        height: 42px !important;
+
+        z-index: 1000 !important;
+    }
+
+
     .technician-page {
-        padding: 20px 15px 24px;
+        width: 100%;
+
+        padding: 70px 15px 24px;
+    }
+
+
+    .technician-page-no-topbar {
+        padding-top: 70px;
+    }
+
+
+    .technician-topbar {
+        height: 65px;
+
+        min-height: 65px;
+
+        padding-left: 70px;
     }
 }
