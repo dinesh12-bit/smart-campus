@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
-import axios from "axios";
+
+import api from "../../api/axios";
 
 import logo from "../../assets/images/smart-campus-logo.png";
 import campusBg from "../../assets/images/smart-campus-bg.jpg";
@@ -18,8 +19,7 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] =
-        useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -32,15 +32,14 @@ function Register() {
         setError("");
         setSuccess("");
 
+        // Validation
         if (!name.trim() || !email.trim() || !password) {
             setError("Please fill all required fields.");
             return;
         }
 
         if (password.length < 8) {
-            setError(
-                "Password must be at least 8 characters."
-            );
+            setError("Password must be at least 8 characters.");
             return;
         }
 
@@ -53,12 +52,13 @@ function Register() {
 
             setLoading(true);
 
-            const response = await axios.post(
-                "http://localhost:8080/api/auth/register",
+            // Centralized API
+            const response = await api.post(
+                "/auth/register",
                 {
                     name: name.trim(),
                     email: email.trim(),
-                    password
+                    password: password
                 }
             );
 
@@ -67,28 +67,42 @@ function Register() {
                 "Registration submitted successfully."
             );
 
+            // Clear form
             setName("");
             setEmail("");
             setPassword("");
             setConfirmPassword("");
 
+            // Redirect to login
             setTimeout(() => {
                 navigate("/login");
             }, 2500);
 
         } catch (err) {
 
+            console.error("Registration error:", err);
+
             if (err.response?.data?.message) {
+
                 setError(err.response.data.message);
-            } else if (err.response?.data) {
+
+            } else if (typeof err.response?.data === "string") {
+
                 setError(err.response.data);
+
+            } else if (err.response?.data?.error) {
+
+                setError(err.response.data.error);
+
             } else {
+
                 setError(
                     "Registration failed. Please try again."
                 );
             }
 
         } finally {
+
             setLoading(false);
         }
     };
@@ -98,23 +112,27 @@ function Register() {
 
             <div className="auth-card">
 
-                {/* Left Side */}
+                {/* ================= LEFT SIDE ================= */}
+
                 <div
                     className="auth-visual"
                     style={{
                         backgroundImage: `url(${campusBg})`
                     }}
                 >
+
                     <div className="visual-overlay"></div>
 
                     <div className="visual-content">
 
                         <div className="visual-heading">
+
                             <span>AI-Powered</span>
 
                             <strong>
                                 Smart <em>Campus</em>
                             </strong>
+
                         </div>
 
                         <p className="visual-description">
@@ -125,12 +143,16 @@ function Register() {
 
                         <div className="visual-features">
 
+                            {/* Smart Monitoring */}
+
                             <div className="visual-feature">
+
                                 <div className="feature-icon">
                                     ◫
                                 </div>
 
                                 <div>
+
                                     <strong>
                                         Smart Monitoring
                                     </strong>
@@ -138,15 +160,21 @@ function Register() {
                                     <span>
                                         Real-time insights
                                     </span>
+
                                 </div>
+
                             </div>
 
+                            {/* Sustainable Campus */}
+
                             <div className="visual-feature">
+
                                 <div className="feature-icon">
                                     ⌁
                                 </div>
 
                                 <div>
+
                                     <strong>
                                         Sustainable Campus
                                     </strong>
@@ -154,15 +182,21 @@ function Register() {
                                     <span>
                                         Greener tomorrow
                                     </span>
+
                                 </div>
+
                             </div>
 
+                            {/* Safer Environment */}
+
                             <div className="visual-feature">
+
                                 <div className="feature-icon">
                                     ◇
                                 </div>
 
                                 <div>
+
                                     <strong>
                                         Safer Environment
                                     </strong>
@@ -170,25 +204,34 @@ function Register() {
                                     <span>
                                         For everyone
                                     </span>
+
                                 </div>
+
                             </div>
 
                         </div>
 
                         <div className="visual-footer">
+
                             SMART CAMPUS
+
                             <span>
                                 BUILDING A SMARTER TOMORROW
                             </span>
+
                         </div>
 
                     </div>
+
                 </div>
 
-                {/* Right Side */}
+                {/* ================= RIGHT SIDE ================= */}
+
                 <div className="auth-form-section">
 
                     <div className="auth-form-container register-container">
+
+                        {/* Brand */}
 
                         <div className="brand">
 
@@ -198,7 +241,9 @@ function Register() {
                                 className="brand-logo"
                             />
 
-                            <h1>Smart Campus</h1>
+                            <h1>
+                                Smart Campus
+                            </h1>
 
                             <p>
                                 Resource Intelligence System
@@ -206,9 +251,13 @@ function Register() {
 
                         </div>
 
+                        {/* Heading */}
+
                         <div className="form-heading">
 
-                            <h2>Create your account</h2>
+                            <h2>
+                                Create your account
+                            </h2>
 
                             <p>
                                 Join us to be part of a smarter campus
@@ -216,11 +265,15 @@ function Register() {
 
                         </div>
 
+                        {/* Error */}
+
                         {error && (
                             <div className="auth-error">
                                 {error}
                             </div>
                         )}
+
+                        {/* Success */}
 
                         {success && (
                             <div className="auth-success">
@@ -228,10 +281,17 @@ function Register() {
                             </div>
                         )}
 
+                        {/* ================= FORM ================= */}
+
                         <form onSubmit={handleRegister}>
 
+                            {/* Full Name */}
+
                             <div className="input-group">
-                                <label>Full Name</label>
+
+                                <label>
+                                    Full Name
+                                </label>
 
                                 <div className="input-wrapper">
 
@@ -242,17 +302,21 @@ function Register() {
                                         placeholder="Enter your full name"
                                         value={name}
                                         onChange={(e) =>
-                                            setName(
-                                                e.target.value
-                                            )
+                                            setName(e.target.value)
                                         }
                                     />
 
                                 </div>
+
                             </div>
 
+                            {/* Email */}
+
                             <div className="input-group">
-                                <label>Email Address</label>
+
+                                <label>
+                                    Email Address
+                                </label>
 
                                 <div className="input-wrapper">
 
@@ -263,17 +327,21 @@ function Register() {
                                         placeholder="Enter your email"
                                         value={email}
                                         onChange={(e) =>
-                                            setEmail(
-                                                e.target.value
-                                            )
+                                            setEmail(e.target.value)
                                         }
                                     />
 
                                 </div>
+
                             </div>
 
+                            {/* Password */}
+
                             <div className="input-group">
-                                <label>Password</label>
+
+                                <label>
+                                    Password
+                                </label>
 
                                 <div className="input-wrapper">
 
@@ -288,9 +356,7 @@ function Register() {
                                         placeholder="Create a password"
                                         value={password}
                                         onChange={(e) =>
-                                            setPassword(
-                                                e.target.value
-                                            )
+                                            setPassword(e.target.value)
                                         }
                                     />
 
@@ -303,18 +369,26 @@ function Register() {
                                             )
                                         }
                                     >
+
                                         {showPassword ? (
                                             <EyeOff size={18} />
                                         ) : (
                                             <Eye size={18} />
                                         )}
+
                                     </button>
 
                                 </div>
+
                             </div>
 
+                            {/* Confirm Password */}
+
                             <div className="input-group">
-                                <label>Confirm Password</label>
+
+                                <label>
+                                    Confirm Password
+                                </label>
 
                                 <div className="input-wrapper">
 
@@ -327,9 +401,7 @@ function Register() {
                                                 : "password"
                                         }
                                         placeholder="Confirm your password"
-                                        value={
-                                            confirmPassword
-                                        }
+                                        value={confirmPassword}
                                         onChange={(e) =>
                                             setConfirmPassword(
                                                 e.target.value
@@ -346,34 +418,45 @@ function Register() {
                                             )
                                         }
                                     >
+
                                         {showConfirmPassword ? (
                                             <EyeOff size={18} />
                                         ) : (
                                             <Eye size={18} />
                                         )}
+
                                     </button>
 
                                 </div>
+
                             </div>
+
+                            {/* Register Button */}
 
                             <button
                                 type="submit"
                                 className="auth-button"
                                 disabled={loading}
                             >
+
                                 {loading
                                     ? "Creating Account..."
                                     : "Register"}
+
                             </button>
 
                         </form>
 
+                        {/* Login */}
+
                         <div className="auth-bottom-text">
+
                             Already have an account?
 
                             <Link to="/login">
                                 Login
                             </Link>
+
                         </div>
 
                     </div>
