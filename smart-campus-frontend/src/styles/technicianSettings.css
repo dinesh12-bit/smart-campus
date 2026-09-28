@@ -1,14 +1,32 @@
+/* =========================================================
+   TECHNICIAN SETTINGS PAGE
+========================================================= */
+
 .technician-settings-page {
     width: 100%;
     min-height: 100%;
+    align-self: stretch;
+
+    padding: 34px 38px 40px;
+
+    box-sizing: border-box;
+
     background: #ffffff;
     color: #172033;
+
     overflow-x: hidden;
+
+    text-align: left;
 }
 
 .technician-settings-page * {
     box-sizing: border-box;
 }
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
 
 .technician-settings-page::-webkit-scrollbar {
     width: 6px;
@@ -29,183 +47,112 @@
     scrollbar-color: #7c3aed #f1f2f7;
 }
 
+
+/* =========================================================
+   CONTAINER
+   SAME ALIGNMENT AS COMPLAINTS PAGE
+========================================================= */
+
 .technician-settings-container {
-    width: min(1000px, 100%);
-    margin: 0 auto;
-    padding: 32px 32px 45px;
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .settings-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 24px;
-}
-
-.settings-breadcrumb {
-    margin: 0 0 8px;
-    color: #8b94a5;
-    font-size: 12px;
-}
-
-.settings-breadcrumb span {
-    margin: 0 8px;
-    color: #c5cad3;
+    width: 100%;
+    margin-bottom: 21px;
+    text-align: left;
 }
 
 .settings-heading h1 {
     margin: 0;
-    color: #182230;
-    font-size: 27px;
+
+    color: #111827;
+
+    font-size: 23px;
+    line-height: 1.2;
     font-weight: 700;
+
+    letter-spacing: -0.4px;
 }
 
-.settings-heading p:last-child {
+.settings-heading p {
     margin: 7px 0 0;
-    color: #737d8f;
-    font-size: 13px;
-}
 
-.settings-refresh-button {
-    width: 39px;
-    height: 39px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e2e6ed;
-    border-radius: 10px;
-    background: #ffffff;
     color: #64748b;
-    cursor: pointer;
+
+    font-size: 12px;
+    line-height: 1.5;
 }
 
-.settings-refresh-button:hover {
-    color: #7c3aed;
-    border-color: #c4b5fd;
-    background: #faf9ff;
-}
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
 
 .settings-success {
+    width: 100%;
+
     display: flex;
     align-items: center;
+
     gap: 8px;
+
     margin-bottom: 18px;
     padding: 11px 14px;
+
     border: 1px solid #bbf7d0;
     border-radius: 9px;
+
     background: #f0fdf4;
     color: #15803d;
+
     font-size: 12px;
     font-weight: 600;
 }
 
-.technician-info-card {
-    margin-bottom: 18px;
-    padding: 28px;
-    border: 1px solid #e1e5ed;
-    border-radius: 14px;
-    background: linear-gradient(
-            135deg,
-            #f1f5ff 0%,
-            #faf9ff 100%
-    );
+.settings-success svg {
+    flex-shrink: 0;
 }
 
-.technician-info-profile {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
 
-.technician-info-avatar {
-    width: 76px;
-    height: 76px;
-    min-width: 76px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #ffffff;
-    color: #2563eb;
-    font-size: 27px;
-    font-weight: 700;
-    box-shadow: 0 5px 15px rgba(30, 41, 59, 0.08);
-}
-
-.technician-info-main {
-    min-width: 0;
-}
-
-.technician-name-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.technician-name-row h2 {
-    margin: 0;
-    color: #172033;
-    font-size: 19px;
-    font-weight: 700;
-}
-
-.technician-active-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 9px;
-    border-radius: 20px;
-    background: #ecfdf3;
-    color: #16a34a;
-    font-size: 9px;
-    font-weight: 700;
-}
-
-.technician-active-badge span {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #22c55e;
-}
-
-.technician-role {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-top: 10px;
-    color: #64748b;
-    font-size: 12px;
-}
-
-.technician-role svg {
-    color: #64748b;
-}
-
-.technician-id {
-    margin: 9px 0 0;
-    color: #788398;
-    font-size: 11px;
-}
-
-.technician-id strong {
-    color: #475569;
-    font-weight: 600;
-}
+/* =========================================================
+   SETTINGS CARD
+========================================================= */
 
 .settings-card {
+    width: 100%;
+
     margin-bottom: 18px;
     padding: 22px;
+
     border: 1px solid #e3e6ec;
     border-radius: 14px;
+
     background: #ffffff;
 }
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
 
 .settings-card-header {
     display: flex;
     align-items: center;
+
     gap: 12px;
+
     margin-bottom: 20px;
 }
 
@@ -213,9 +160,11 @@
     width: 42px;
     height: 42px;
     min-width: 42px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
 }
 
@@ -241,47 +190,106 @@
 
 .settings-card-header h2 {
     margin: 0;
+
     color: #273142;
+
     font-size: 15px;
+    line-height: 1.3;
     font-weight: 700;
 }
 
 .settings-card-header p {
     margin: 4px 0 0;
+
     color: #7c8798;
+
     font-size: 11px;
+    line-height: 1.4;
 }
 
-.account-grid {
+
+/* =========================================================
+   ACCOUNT INFORMATION
+========================================================= */
+
+.account-information {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding-top: 2px;
+}
+
+.account-avatar {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ede9fe;
+    color: #7c3aed;
+
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.account-details {
+    flex: 1;
+
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
     border-top: 1px solid #eceef2;
 }
 
-.account-item {
+.account-detail {
     min-width: 0;
-    padding: 17px 15px;
+
+    padding: 14px 15px;
+
     border-bottom: 1px solid #eceef2;
 }
 
-.account-item:nth-child(odd) {
+.account-detail:nth-child(odd) {
     border-right: 1px solid #eceef2;
 }
 
-.account-item span {
+.account-detail span {
     display: block;
-    margin-bottom: 6px;
+
+    margin-bottom: 5px;
+
     color: #8b95a5;
+
     font-size: 10px;
 }
 
-.account-item strong {
+.account-detail strong {
     display: block;
+
     color: #344054;
+
     font-size: 12px;
     font-weight: 600;
+
     overflow-wrap: anywhere;
 }
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
 
 .settings-options {
     border-top: 1px solid #eceef2;
@@ -290,9 +298,13 @@
 .setting-row {
     display: flex;
     align-items: center;
+
     gap: 13px;
+
     min-height: 70px;
+
     padding: 12px 2px;
+
     border-bottom: 1px solid #eceef2;
 }
 
@@ -304,9 +316,11 @@
     width: 38px;
     height: 38px;
     min-width: 38px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
 }
 
@@ -332,40 +346,63 @@
 
 .setting-row-content h3 {
     margin: 0;
+
     color: #344054;
+
     font-size: 12px;
     font-weight: 600;
 }
 
 .setting-row-content p {
     margin: 4px 0 0;
+
     color: #8a94a4;
+
     font-size: 10px;
     line-height: 1.5;
 }
 
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
 .settings-switch {
     position: relative;
+
     width: 42px;
     height: 23px;
     min-width: 42px;
+
     padding: 0;
+
     border: none;
     border-radius: 20px;
+
     background: #d1d5db;
+
     cursor: pointer;
 }
 
 .settings-switch span {
     position: absolute;
+
     top: 3px;
     left: 3px;
+
     width: 17px;
     height: 17px;
+
     border-radius: 50%;
+
     background: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
-    transition: transform 0.2s ease;
+
+    box-shadow:
+            0 1px 3px
+            rgba(0, 0, 0, 0.18);
+
+    transition:
+            transform 0.2s ease;
 }
 
 .settings-switch.active {
@@ -376,22 +413,40 @@
     transform: translateX(19px);
 }
 
+
+/* =========================================================
+   APPEARANCE
+========================================================= */
+
 .appearance-options {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
     gap: 11px;
 }
 
 .appearance-option {
     display: flex;
     align-items: center;
+
     gap: 10px;
+
     min-width: 0;
+
     padding: 13px;
+
     border: 1px solid #e4e7ec;
     border-radius: 10px;
+
     background: #ffffff;
+
     text-align: left;
+
     cursor: pointer;
 }
 
@@ -409,9 +464,11 @@
     width: 36px;
     height: 36px;
     min-width: 36px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
 }
 
@@ -437,55 +494,87 @@
 
 .appearance-option strong {
     display: block;
+
     color: #344054;
+
     font-size: 11px;
 }
 
 .appearance-option span {
     display: block;
+
     margin-top: 3px;
+
     color: #929aaa;
+
     font-size: 9px;
 }
 
 .appearance-option > svg {
     flex-shrink: 0;
+
     color: #7c3aed;
 }
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
 
 .security-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
+
     padding: 15px;
+
     border-radius: 10px;
+
     background: #fff8f8;
 }
 
 .security-content h3 {
     margin: 0;
+
     color: #344054;
+
     font-size: 12px;
 }
 
 .security-content p {
     margin: 4px 0 0;
+
     color: #8a94a4;
+
     font-size: 10px;
+    line-height: 1.5;
 }
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
 
 .logout-settings-button {
     display: inline-flex;
     align-items: center;
+
     gap: 6px;
+
     padding: 8px 13px;
+
     border: 1px solid #fecaca;
     border-radius: 7px;
+
     background: #ffffff;
+
     color: #dc2626;
+
     font-size: 11px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
@@ -493,10 +582,18 @@
     background: #fef2f2;
 }
 
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
 .settings-actions {
     display: flex;
+
     justify-content: flex-end;
+
     gap: 9px;
+
     margin-top: 20px;
 }
 
@@ -505,23 +602,36 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     gap: 6px;
+
     padding: 9px 15px;
+
     border-radius: 8px;
+
     font-size: 11px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
 .reset-settings-button {
     border: 1px solid #e0e3e8;
+
     background: #ffffff;
+
     color: #667085;
+}
+
+.reset-settings-button:hover {
+    background: #f8fafc;
 }
 
 .save-settings-button {
     border: 1px solid #7c3aed;
+
     background: #7c3aed;
+
     color: #ffffff;
 }
 
@@ -529,49 +639,72 @@
     background: #6d28d9;
 }
 
-@media (max-width: 750px) {
-    .technician-settings-container {
-        padding: 25px 20px 35px;
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .technician-settings-page {
+        padding: 28px 24px 40px;
+    }
+
+    .account-information {
+        align-items: flex-start;
+    }
+
+    .account-details {
+        width: 100%;
     }
 
     .appearance-options {
         grid-template-columns: 1fr;
     }
+
 }
 
-@media (max-width: 600px) {
-    .technician-settings-container {
-        padding: 20px 15px 30px;
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .technician-settings-page {
+        padding: 24px 18px 35px;
     }
 
     .settings-heading h1 {
-        font-size: 23px;
+        font-size: 24px;
     }
 
-    .technician-info-card {
-        padding: 20px;
+    .settings-heading p {
+        font-size: 11px;
     }
 
-    .technician-info-profile {
+    .settings-card {
+        padding: 18px;
+    }
+
+    .account-information {
+        flex-direction: column;
         align-items: flex-start;
     }
 
-    .technician-info-avatar {
+    .account-avatar {
         width: 62px;
         height: 62px;
         min-width: 62px;
-        font-size: 23px;
+
+        font-size: 22px;
     }
 
-    .technician-name-row h2 {
-        font-size: 16px;
-    }
-
-    .account-grid {
+    .account-details {
         grid-template-columns: 1fr;
     }
 
-    .account-item:nth-child(odd) {
+    .account-detail:nth-child(odd) {
         border-right: none;
     }
 
@@ -580,7 +713,7 @@
     }
 
     .settings-switch {
-        margin-top: 4px;
+        margin-top: 3px;
     }
 
     .security-content {
@@ -601,34 +734,48 @@
     .save-settings-button {
         width: 100%;
     }
+
 }
 
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media (max-width: 400px) {
-    .technician-info-profile {
-        gap: 13px;
-    }
 
-    .technician-info-avatar {
-        width: 54px;
-        height: 54px;
-        min-width: 54px;
-        font-size: 20px;
-    }
-
-    .technician-info-card {
-        padding: 17px;
+    .technician-settings-page {
+        padding: 20px 14px 30px;
     }
 
     .settings-card {
-        padding: 17px;
+        padding: 16px;
     }
 
-    .technician-name-row {
-        gap: 6px;
+    .settings-card-header {
+        gap: 9px;
     }
 
-    .technician-active-badge {
-        padding: 5px 7px;
-        font-size: 8px;
+    .settings-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
     }
+
+    .settings-card-header h2 {
+        font-size: 14px;
+    }
+
+    .settings-card-header p {
+        font-size: 10px;
+    }
+
+    .setting-row {
+        gap: 9px;
+    }
+
+    .setting-row-content p {
+        font-size: 9px;
+    }
+
 }

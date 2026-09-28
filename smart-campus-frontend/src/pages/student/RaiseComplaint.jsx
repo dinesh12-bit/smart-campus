@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+
 import {
     ArrowLeft,
     ChevronDown,
@@ -15,9 +16,11 @@ import {
 } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
+
 import api from "../../api/axios";
 
 import "../../styles/studentRaiseComplaint.css";
+
 
 const categoryOptions = [
     {
@@ -64,6 +67,7 @@ const categoryOptions = [
     },
 ];
 
+
 const locationOptions = [
     {
         value: "ROOM-204",
@@ -103,8 +107,82 @@ const locationOptions = [
     },
 ];
 
+
+// =========================================================
+// IMAGE COMPRESS + BASE64
+// =========================================================
+
+const compressImageToBase64 = (
+    file,
+    maxWidth = 1280,
+    maxHeight = 1280,
+    quality = 0.75
+) => {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+
+            const image = new Image();
+
+            image.onload = () => {
+
+                let width = image.width;
+                let height = image.height;
+
+                const scale = Math.min(
+                    maxWidth / width,
+                    maxHeight / height,
+                    1
+                );
+
+                width = Math.round(width * scale);
+                height = Math.round(height * scale);
+
+                const canvas =
+                    document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const context =
+                    canvas.getContext("2d");
+
+                context.drawImage(
+                    image,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+                const base64 =
+                    canvas.toDataURL(
+                        "image/jpeg",
+                        quality
+                    );
+
+                resolve(base64);
+            };
+
+            image.onerror = reject;
+
+            image.src = event.target.result;
+        };
+
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+    });
+};
+
+
 function RaiseComplaint() {
+
     const navigate = useNavigate();
+
     const fileInputRef = useRef(null);
 
     const [form, setForm] = useState({
@@ -115,25 +193,49 @@ function RaiseComplaint() {
         description: "",
     });
 
-    const [categoryOpen, setCategoryOpen] = useState(false);
-    const [locationOpen, setLocationOpen] = useState(false);
+    const [categoryOpen, setCategoryOpen] =
+        useState(false);
 
-    const [photo, setPhoto] = useState(null);
+    const [locationOpen, setLocationOpen] =
+        useState(false);
 
-    const [submitting, setSubmitting] = useState(false);
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    const [photo, setPhoto] =
+        useState(null);
 
-    const selectedCategory = categoryOptions.find(
-        (item) => item.value === form.category
-    );
+    const [submitting, setSubmitting] =
+        useState(false);
 
-    const selectedLocation = locationOptions.find(
-        (item) => item.value === form.location
-    );
+    const [error, setError] =
+        useState("");
+
+    const [success, setSuccess] =
+        useState("");
+
+
+    const selectedCategory =
+        categoryOptions.find(
+            (item) =>
+                item.value === form.category
+        );
+
+
+    const selectedLocation =
+        locationOptions.find(
+            (item) =>
+                item.value === form.location
+        );
+
+
+    // =========================================================
+    // FORM CHANGE
+    // =========================================================
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+
+        const {
+            name,
+            value,
+        } = e.target;
 
         setForm((prev) => ({
             ...prev,
@@ -143,32 +245,54 @@ function RaiseComplaint() {
         setError("");
     };
 
+
+    // =========================================================
+    // CATEGORY
+    // =========================================================
+
     const selectCategory = (category) => {
+
         setForm((prev) => ({
             ...prev,
             category,
         }));
 
         setCategoryOpen(false);
+
         setError("");
     };
 
+
+    // =========================================================
+    // LOCATION
+    // =========================================================
+
     const selectLocation = (location) => {
+
         setForm((prev) => ({
             ...prev,
             location,
         }));
 
         setLocationOpen(false);
+
         setError("");
     };
 
+
+    // =========================================================
+    // PHOTO SELECT
+    // =========================================================
+
     const handlePhotoChange = (e) => {
-        const file = e.target.files?.[0];
+
+        const file =
+            e.target.files?.[0];
 
         if (!file) {
             return;
         }
+
 
         if (
             ![
@@ -177,32 +301,58 @@ function RaiseComplaint() {
                 "image/jpg",
             ].includes(file.type)
         ) {
-            setError("Please upload a PNG or JPG image.");
+
+            setError(
+                "Please upload a PNG or JPG image."
+            );
+
             return;
         }
+
 
         if (file.size > 5 * 1024 * 1024) {
-            setError("Image size must be less than 5 MB.");
+
+            setError(
+                "Image size must be less than 5 MB."
+            );
+
             return;
         }
 
+
         setPhoto(file);
+
         setError("");
     };
 
+
+    // =========================================================
+    // REMOVE PHOTO
+    // =========================================================
+
     const removePhoto = () => {
+
         setPhoto(null);
 
         if (fileInputRef.current) {
+
             fileInputRef.current.value = "";
         }
     };
 
+
+    // =========================================================
+    // SUBMIT
+    // =========================================================
+
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         setError("");
+
         setSuccess("");
+
 
         if (
             !form.category ||
@@ -210,38 +360,110 @@ function RaiseComplaint() {
             !form.location ||
             !form.description.trim()
         ) {
-            setError("Please fill all required fields.");
+
+            setError(
+                "Please fill all required fields."
+            );
+
             return;
         }
 
+
         try {
+
             setSubmitting(true);
 
-            const storage = sessionStorage.getItem("token")
-                ? sessionStorage
-                : localStorage;
 
-            const studentId = storage.getItem("userId");
+            const storage =
+                sessionStorage.getItem("token")
+                    ? sessionStorage
+                    : localStorage;
+
+
+            const studentId =
+                storage.getItem("userId");
+
+
+            // =================================================
+            // COMPRESS IMAGE
+            // =================================================
+
+            let imageData = null;
+
+
+            if (photo) {
+
+                imageData =
+                    await compressImageToBase64(
+                        photo
+                    );
+
+                /*
+                 * Keep Base64 image reasonably small.
+                 *
+                 * If still too large, compress more.
+                 */
+
+                if (
+                    imageData.length >
+                    1100000
+                ) {
+
+                    imageData =
+                        await compressImageToBase64(
+                            photo,
+                            1000,
+                            1000,
+                            0.60
+                        );
+                }
+            }
+
+
+            // =================================================
+            // PAYLOAD
+            // =================================================
 
             const payload = {
-                category: form.category,
-                subject: form.subject.trim(),
-                location: form.location,
-                description: form.description.trim(),
-                priority: form.priority,
+
                 studentId: studentId
                     ? Number(studentId)
                     : null,
+
+                subject:
+                    form.subject.trim(),
+
+                location:
+                form.location,
+
+                description:
+                    form.description.trim(),
+
+                category:
+                form.category,
+
+                priority:
+                form.priority,
+
+                imageData:
+                imageData,
             };
+
+
+            // =================================================
+            // API
+            // =================================================
 
             await api.post(
                 "/api/complaints",
                 payload
             );
 
+
             setSuccess(
                 "Complaint submitted successfully."
             );
+
 
             setForm({
                 category: "",
@@ -251,40 +473,62 @@ function RaiseComplaint() {
                 description: "",
             });
 
+
             setPhoto(null);
 
+
             if (fileInputRef.current) {
+
                 fileInputRef.current.value = "";
             }
 
+
             setTimeout(() => {
-                navigate("/student/complaints");
+
+                navigate(
+                    "/student/complaints"
+                );
+
             }, 1000);
 
+
         } catch (err) {
-            console.error(err);
+
+            console.error(
+                "Complaint submission error:",
+                err
+            );
+
 
             setError(
                 err.response?.data?.message ||
+                err.response?.data?.error ||
                 "Unable to submit complaint. Please try again."
             );
+
         } finally {
+
             setSubmitting(false);
         }
     };
 
+
     return (
+
         <div
             className="student-raise-page"
+
             onClick={() => {
+
                 setCategoryOpen(false);
+
                 setLocationOpen(false);
             }}
         >
 
-            {/* =========================
-                PAGE HEADER
-            ========================= */}
+            {/* =================================================
+                HEADER
+            ================================================= */}
 
             <div className="student-raise-header">
 
@@ -293,20 +537,30 @@ function RaiseComplaint() {
                     <button
                         type="button"
                         className="student-back-button"
+
                         onClick={(e) => {
+
                             e.stopPropagation();
-                            navigate("/student/dashboard");
+
+                            navigate(
+                                "/student/dashboard"
+                            );
                         }}
                     >
+
                         <ArrowLeft size={25} />
+
                     </button>
 
+
                     <div>
+
                         <h1>
                             Raise Complaint
                         </h1>
 
                         <div className="student-breadcrumb">
+
                             <span>
                                 Dashboard
                             </span>
@@ -318,7 +572,9 @@ function RaiseComplaint() {
                             <strong>
                                 Raise Complaint
                             </strong>
+
                         </div>
+
                     </div>
 
                 </div>
@@ -326,13 +582,15 @@ function RaiseComplaint() {
             </div>
 
 
-            {/* =========================
-                COMPLAINT FORM
-            ========================= */}
+            {/* =================================================
+                FORM
+            ================================================= */}
 
             <form
                 className="student-complaint-card"
+
                 onSubmit={handleSubmit}
+
                 onClick={(e) =>
                     e.stopPropagation()
                 }
@@ -344,23 +602,33 @@ function RaiseComplaint() {
 
 
                 {error && (
+
                     <div className="student-form-alert error">
+
                         {error}
+
                     </div>
                 )}
+
 
                 {success && (
+
                     <div className="student-form-alert success">
+
                         {success}
+
                     </div>
                 )}
 
+
+                {/* =================================================
+                    FORM GRID
+                ================================================= */}
 
                 <div className="student-form-grid">
 
-                    {/* =====================
-                        CATEGORY
-                    ===================== */}
+
+                    {/* CATEGORY */}
 
                     <div className="student-form-field">
 
@@ -369,55 +637,80 @@ function RaiseComplaint() {
                             <span>*</span>
                         </label>
 
+
                         <div className="student-custom-dropdown">
 
                             <button
                                 type="button"
+
                                 className={`student-dropdown-trigger ${
                                     categoryOpen
                                         ? "open"
                                         : ""
                                 }`}
+
                                 onClick={() => {
+
                                     setCategoryOpen(
                                         !categoryOpen
                                     );
+
                                     setLocationOpen(false);
                                 }}
                             >
 
                                 {selectedCategory ? (
+
                                     <>
+
                                         <span
                                             className={`student-selected-icon ${selectedCategory.className}`}
                                         >
+
                                             <selectedCategory.icon
                                                 size={17}
                                             />
+
                                         </span>
 
+
                                         <span className="student-selected-text">
+
                                             {
                                                 selectedCategory.label
                                             }
+
                                         </span>
+
                                     </>
+
                                 ) : (
+
                                     <>
+
                                         <span className="student-selected-icon empty">
+
                                             <FileText
                                                 size={17}
                                             />
+
                                         </span>
 
+
                                         <span className="student-placeholder">
+
                                             Select a category
+
                                         </span>
+
                                     </>
+
                                 )}
+
 
                                 <ChevronDown
                                     size={18}
+
                                     className={
                                         categoryOpen
                                             ? "rotate"
@@ -429,25 +722,31 @@ function RaiseComplaint() {
 
 
                             {categoryOpen && (
+
                                 <div className="student-dropdown-menu">
 
                                     {categoryOptions.map(
                                         (item) => {
+
                                             const Icon =
                                                 item.icon;
 
                                             return (
+
                                                 <button
                                                     type="button"
+
                                                     key={
                                                         item.value
                                                     }
+
                                                     className={`student-category-option ${
                                                         form.category ===
                                                         item.value
                                                             ? "selected"
                                                             : ""
                                                     }`}
+
                                                     onClick={() =>
                                                         selectCategory(
                                                             item.value
@@ -458,10 +757,13 @@ function RaiseComplaint() {
                                                     <span
                                                         className={`student-category-icon ${item.className}`}
                                                     >
+
                                                         <Icon
                                                             size={17}
                                                         />
+
                                                     </span>
+
 
                                                     <span>
                                                         {
@@ -482,9 +784,7 @@ function RaiseComplaint() {
                     </div>
 
 
-                    {/* =====================
-                        SUBJECT
-                    ===================== */}
+                    {/* SUBJECT */}
 
                     <div className="student-form-field">
 
@@ -493,11 +793,15 @@ function RaiseComplaint() {
                             <span>*</span>
                         </label>
 
+
                         <div className="student-input-icon-wrapper">
 
                             <span className="student-input-icon purple">
+
                                 <Type size={16} />
+
                             </span>
+
 
                             <input
                                 type="text"
@@ -505,7 +809,7 @@ function RaiseComplaint() {
                                 value={form.subject}
                                 onChange={handleChange}
                                 placeholder="Enter a brief subject"
-                                maxLength={150}
+                                maxLength={100}
                                 required
                             />
 
@@ -514,9 +818,7 @@ function RaiseComplaint() {
                     </div>
 
 
-                    {/* =====================
-                        LOCATION
-                    ===================== */}
+                    {/* LOCATION */}
 
                     <div className="student-form-field">
 
@@ -525,19 +827,24 @@ function RaiseComplaint() {
                             <span>*</span>
                         </label>
 
+
                         <div className="student-custom-dropdown">
 
                             <button
                                 type="button"
+
                                 className={`student-dropdown-trigger ${
                                     locationOpen
                                         ? "open"
                                         : ""
                                 }`}
+
                                 onClick={() => {
+
                                     setLocationOpen(
                                         !locationOpen
                                     );
+
                                     setCategoryOpen(false);
                                 }}
                             >
@@ -549,13 +856,17 @@ function RaiseComplaint() {
                                             : "student-placeholder"
                                     }
                                 >
+
                                     {selectedLocation
                                         ? selectedLocation.label
                                         : "Select location"}
+
                                 </span>
+
 
                                 <ChevronDown
                                     size={18}
+
                                     className={
                                         locationOpen
                                             ? "rotate"
@@ -567,30 +878,37 @@ function RaiseComplaint() {
 
 
                             {locationOpen && (
+
                                 <div className="student-dropdown-menu location-menu">
 
                                     {locationOptions.map(
                                         (item) => (
+
                                             <button
                                                 type="button"
+
                                                 key={
                                                     item.value
                                                 }
+
                                                 className={`student-location-option ${
                                                     form.location ===
                                                     item.value
                                                         ? "selected"
                                                         : ""
                                                 }`}
+
                                                 onClick={() =>
                                                     selectLocation(
                                                         item.value
                                                     )
                                                 }
                                             >
+
                                                 {
                                                     item.label
                                                 }
+
                                             </button>
                                         )
                                     )}
@@ -603,9 +921,7 @@ function RaiseComplaint() {
                     </div>
 
 
-                    {/* =====================
-                        PRIORITY
-                    ===================== */}
+                    {/* PRIORITY */}
 
                     <div className="student-form-field">
 
@@ -614,7 +930,9 @@ function RaiseComplaint() {
                             <span>*</span>
                         </label>
 
+
                         <div className="student-priority-grid">
+
 
                             <label
                                 className={`student-priority-option low ${
@@ -709,9 +1027,9 @@ function RaiseComplaint() {
                 </div>
 
 
-                {/* =========================
+                {/* =================================================
                     DESCRIPTION
-                ========================= */}
+                ================================================= */}
 
                 <div className="student-form-field student-description-field">
 
@@ -720,74 +1038,98 @@ function RaiseComplaint() {
                         <span>*</span>
                     </label>
 
+
                     <textarea
                         name="description"
                         value={form.description}
                         onChange={handleChange}
                         placeholder="Please describe your issue in detail..."
-                        maxLength={500}
+                        maxLength={1000}
                         required
                     />
 
+
                     <div className="student-character-count">
-                        {form.description.length}/500
+
+                        {form.description.length}/1000
+
                     </div>
 
                 </div>
 
 
-                {/* =========================
-                    UPLOAD
-                ========================= */}
+                {/* =================================================
+                    PHOTO
+                ================================================= */}
 
                 <div className="student-upload-section">
 
                     <label className="student-upload-label">
+
                         Upload Photo
+
                         <span className="optional">
                             (Optional)
                         </span>
+
                     </label>
 
+
                     {!photo ? (
+
                         <button
                             type="button"
                             className="student-upload-box"
+
                             onClick={() =>
                                 fileInputRef.current?.click()
                             }
                         >
+
                             <span className="student-upload-icon">
-                                <ImagePlus size={22} />
+
+                                <ImagePlus
+                                    size={22}
+                                />
+
                             </span>
+
 
                             <strong>
                                 Click to upload
                             </strong>
 
+
                             <span>
                                 PNG, JPG up to 5MB
                             </span>
+
                         </button>
+
                     ) : (
+
                         <div className="student-upload-preview">
 
                             <img
                                 src={URL.createObjectURL(
                                     photo
                                 )}
-                                alt="Complaint"
+                                alt="Complaint preview"
                             />
+
 
                             <button
                                 type="button"
                                 onClick={removePhoto}
                             >
+
                                 <X size={17} />
+
                             </button>
 
                         </div>
                     )}
+
 
                     <input
                         ref={fileInputRef}
@@ -800,31 +1142,41 @@ function RaiseComplaint() {
                 </div>
 
 
-                {/* =========================
+                {/* =================================================
                     ACTIONS
-                ========================= */}
+                ================================================= */}
 
                 <div className="student-form-actions">
 
                     <button
                         type="button"
                         className="student-cancel-button"
+
                         onClick={() =>
-                            navigate("/student/dashboard")
+                            navigate(
+                                "/student/dashboard"
+                            )
                         }
+
                         disabled={submitting}
                     >
+
                         Cancel
+
                     </button>
+
 
                     <button
                         type="submit"
                         className="student-submit-button"
+
                         disabled={submitting}
                     >
+
                         {submitting
                             ? "Submitting..."
                             : "Submit Complaint"}
+
                     </button>
 
                 </div>

@@ -1,3 +1,7 @@
+/* =========================================================
+   TECHNICIAN COMPLAINTS PAGE
+========================================================= */
+
 .technician-complaints-page {
     width: 100%;
     min-height: 100%;
@@ -8,6 +12,11 @@
     color: #0f172a;
     text-align: left;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .technician-complaints-header {
     margin-bottom: 21px;
@@ -30,7 +39,9 @@
 }
 
 
-/* Loading */
+/* =========================================================
+   LOADING
+========================================================= */
 
 .technician-complaints-loading {
     min-height: 520px;
@@ -63,7 +74,9 @@
 }
 
 
-/* Stats */
+/* =========================================================
+   STATS
+========================================================= */
 
 .technician-complaints-stats {
     display: grid;
@@ -135,7 +148,9 @@
 }
 
 
-/* Toolbar */
+/* =========================================================
+   TOOLBAR
+========================================================= */
 
 .technician-complaints-toolbar {
     width: 100%;
@@ -186,7 +201,9 @@
 }
 
 
-/* Dropdown */
+/* =========================================================
+   DROPDOWN
+========================================================= */
 
 .technician-filter-dropdown {
     width: 114px;
@@ -218,10 +235,6 @@
 .technician-filter-dropdown-btn:focus {
     border-color: #a78bfa;
     box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.08);
-}
-
-.technician-filter-dropdown-btn svg {
-    flex-shrink: 0;
 }
 
 .technician-filter-dropdown-menu {
@@ -261,13 +274,25 @@
     color: #ffffff;
 }
 
-.technician-filter-dropdown-menu button.selected:hover {
-    background: #6d28d9;
-    color: #ffffff;
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.technician-complaints-error {
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 11px;
 }
 
 
-/* Table */
+/* =========================================================
+   TABLE
+========================================================= */
 
 .technician-complaints-table-card {
     width: 100%;
@@ -321,6 +346,9 @@
     background: #fcfcff;
 }
 
+
+/* COLUMN WIDTHS */
+
 .technician-complaints-table th:nth-child(1),
 .technician-complaints-table td:nth-child(1) {
     width: 48px;
@@ -367,7 +395,9 @@
 }
 
 
-/* Table content */
+/* =========================================================
+   TABLE CONTENT
+========================================================= */
 
 .technician-complaint-id {
     color: #64748b;
@@ -427,6 +457,11 @@
     flex-shrink: 0;
     color: #7c3aed;
 }
+
+
+/* =========================================================
+   BADGES
+========================================================= */
 
 .technician-complaint-badge {
     display: inline-flex;
@@ -493,7 +528,44 @@
 }
 
 
-/* View */
+/* =========================================================
+   UNASSIGNED / NEW
+========================================================= */
+
+.complaint-status-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.complaint-unassigned-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 7px;
+    border-radius: 20px;
+    background: #f3e8ff;
+    color: #7c3aed;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.complaint-unassigned-modal-label {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #f3e8ff;
+    color: #7c3aed;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
 
 .technician-complaint-view {
     width: 29px;
@@ -515,7 +587,20 @@
 }
 
 
-/* Empty */
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.technician-complaints-table-footer {
+    padding: 14px 14px;
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .technician-complaints-empty {
     min-height: 160px;
@@ -542,16 +627,9 @@
 }
 
 
-/* Error */
-
-.technician-complaints-error {
-    padding: 14px 18px;
-    color: #dc2626;
-    font-size: 11px;
-}
-
-
-/* Modal */
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
 
 .technician-complaint-modal-overlay {
     position: fixed;
@@ -563,6 +641,11 @@
     padding: 20px;
     background: rgba(15, 23, 42, 0.42);
 }
+
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .technician-complaint-modal {
     width: min(680px, 100%);
@@ -618,7 +701,9 @@
 }
 
 
-/* Modal summary */
+/* =========================================================
+   SUMMARY
+========================================================= */
 
 .complaint-modal-summary {
     display: flex;
@@ -671,7 +756,9 @@
 }
 
 
-/* Detail */
+/* =========================================================
+   DETAIL GRID
+========================================================= */
 
 .complaint-detail-grid {
     display: grid;
@@ -717,7 +804,9 @@
 }
 
 
-/* Description */
+/* =========================================================
+   DESCRIPTION
+========================================================= */
 
 .complaint-modal-description {
     margin-bottom: 18px;
@@ -750,7 +839,53 @@
 }
 
 
-/* Status */
+/* =========================================================
+   ATTACHED IMAGE
+========================================================= */
+
+.complaint-modal-image-section {
+    margin-bottom: 20px;
+    padding-top: 17px;
+    border-top: 1px solid #edf0f5;
+}
+
+.complaint-modal-image-wrapper {
+    width: 100%;
+    min-height: 120px;
+    max-height: 360px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #e8eaf1;
+    border-radius: 12px;
+    background: #f8f9fc;
+}
+
+.complaint-modal-image {
+    display: block;
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+}
+
+.complaint-modal-no-image {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 8px;
+    background: #f8f9fc;
+    color: #7a8191;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATUS PANEL
+========================================================= */
 
 .complaint-status-panel {
     padding-top: 17px;
@@ -770,6 +905,12 @@
 .complaint-current-status > span {
     color: #64748b;
     font-size: 9px;
+}
+
+.complaint-current-status > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .complaint-status-selector {
@@ -806,6 +947,17 @@
 
 .complaint-status-option:hover {
     background: #f8fafc;
+}
+
+.complaint-status-option:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.complaint-status-option.active.pending {
+    border-color: #f59e0b;
+    background: #fffbeb;
+    color: #b45309;
 }
 
 .complaint-status-option.active.assigned {
@@ -875,7 +1027,9 @@
 }
 
 
-/* Footer */
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
 
 .technician-complaint-modal-footer {
     display: flex;
@@ -901,7 +1055,9 @@
 }
 
 
-/* Profile-style lavender scrollbar */
+/* =========================================================
+   SCROLLBAR
+========================================================= */
 
 * {
     scrollbar-width: thin;
@@ -927,19 +1083,27 @@
 }
 
 
-/* Responsive */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 1100px) {
+
     .technician-complaints-page {
         padding: 30px 28px 35px;
     }
 
     .technician-complaints-stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
     }
 }
 
+
 @media (max-width: 760px) {
+
     .technician-complaints-page {
         padding: 24px 18px 30px;
     }
@@ -970,7 +1134,9 @@
     }
 }
 
+
 @media (max-width: 520px) {
+
     .technician-complaints-page {
         padding: 20px 14px 25px;
     }
@@ -989,28 +1155,4 @@
         padding-left: 16px;
         padding-right: 16px;
     }
-}
-
-.technician-complaints-header,
-.technician-complaints-stats,
-.technician-complaints-toolbar,
-.technician-complaints-table-card {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.technician-complaints-header {
-    text-align: left;
-}
-
-.technician-complaints-stats {
-    width: 100%;
-}
-
-.technician-complaints-toolbar {
-    width: 100%;
-}
-
-.technician-complaints-table-card {
-    width: 100%;
 }

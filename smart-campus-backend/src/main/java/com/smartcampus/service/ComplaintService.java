@@ -25,7 +25,10 @@ public class ComplaintService {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
 
-    // Create complaint
+    // =========================================================
+    // CREATE COMPLAINT
+    // =========================================================
+
     public ComplaintResponseDTO createComplaint(
             ComplaintRequestDTO request
     ) {
@@ -39,23 +42,64 @@ public class ComplaintService {
                 )
         );
 
-        Room room = roomRepository.findById(
-                request.getRoomId()
-        ).orElseThrow(() ->
-                new EntityNotFoundException(
-                        "Room not found with ID: "
-                                + request.getRoomId()
+        /*
+         * Frontend sends:
+         * ROOM-204
+         * ROOM-203
+         * etc.
+         *
+         * We find the corresponding Room entity here.
+         */
+        Room room = roomRepository.findAll()
+                .stream()
+                .filter(existingRoom ->
+                        existingRoom.getRoomCode() != null
+                                && existingRoom
+                                .getRoomCode()
+                                .equalsIgnoreCase(
+                                        request.getLocation().trim()
+                                )
                 )
-        );
+                .findFirst()
+                .orElseThrow(() ->
+                        new EntityNotFoundException(
+                                "Room not found: "
+                                        + request.getLocation()
+                        )
+                );
 
         Complaint complaint = Complaint.builder()
+
                 .student(student)
+
                 .room(room)
-                .title(request.getTitle())
-                .description(request.getDescription())
-                .category(request.getCategory())
-                .priority(ComplaintPriority.MEDIUM)
-                .status(ComplaintStatus.PENDING)
+
+                .title(
+                        request.getSubject().trim()
+                )
+
+                .description(
+                        request.getDescription().trim()
+                )
+
+                .imageData(
+                        request.getImageData()
+                )
+
+                .category(
+                        request.getCategory()
+                )
+
+                .priority(
+                        request.getPriority() != null
+                                ? request.getPriority()
+                                : ComplaintPriority.MEDIUM
+                )
+
+                .status(
+                        ComplaintStatus.PENDING
+                )
+
                 .build();
 
         Complaint savedComplaint =
@@ -66,7 +110,10 @@ public class ComplaintService {
         );
     }
 
-    // Get all complaints
+    // =========================================================
+    // GET ALL COMPLAINTS
+    // =========================================================
+
     public List<ComplaintResponseDTO> getAllComplaints() {
 
         return complaintRepository
@@ -76,7 +123,10 @@ public class ComplaintService {
                 .toList();
     }
 
-    // Get complaint by ID
+    // =========================================================
+    // GET COMPLAINT BY ID
+    // =========================================================
+
     public ComplaintResponseDTO getComplaintById(
             Long id
     ) {
@@ -95,7 +145,10 @@ public class ComplaintService {
         );
     }
 
-    // Get complaints of a student
+    // =========================================================
+    // GET STUDENT COMPLAINTS
+    // =========================================================
+
     public List<ComplaintResponseDTO> getStudentComplaints(
             Long studentId
     ) {
@@ -109,7 +162,10 @@ public class ComplaintService {
                 .toList();
     }
 
-    // Assign technician
+    // =========================================================
+    // ASSIGN TECHNICIAN
+    // =========================================================
+
     public ComplaintResponseDTO assignTechnician(
             Long complaintId,
             Long technicianId
@@ -134,13 +190,14 @@ public class ComplaintService {
                         );
 
         if (technician.getRole() != UserRole.TECHNICIAN) {
+
             throw new IllegalArgumentException(
                     "Selected user is not a technician"
             );
         }
 
-        if (technician.getStatus() !=
-                com.smartcampus.entity.UserStatus.ACTIVE) {
+        if (technician.getStatus()
+                != com.smartcampus.entity.UserStatus.ACTIVE) {
 
             throw new IllegalArgumentException(
                     "Technician is not active"
@@ -158,7 +215,10 @@ public class ComplaintService {
         );
     }
 
-    // Get complaints assigned to technician
+    // =========================================================
+    // GET TECHNICIAN COMPLAINTS
+    // =========================================================
+
     public List<ComplaintResponseDTO> getTechnicianComplaints(
             Long technicianId
     ) {
@@ -173,6 +233,7 @@ public class ComplaintService {
                         );
 
         if (technician.getRole() != UserRole.TECHNICIAN) {
+
             throw new IllegalArgumentException(
                     "User is not a technician"
             );
@@ -187,7 +248,10 @@ public class ComplaintService {
                 .toList();
     }
 
-    // Update complaint status
+    // =========================================================
+    // UPDATE STATUS
+    // =========================================================
+
     public ComplaintResponseDTO updateStatus(
             Long id,
             ComplaintStatus status

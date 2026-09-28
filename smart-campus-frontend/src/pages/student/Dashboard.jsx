@@ -26,10 +26,12 @@ function Dashboard() {
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState("");
 
+    // =========================================================
+    // STUDENT SETTINGS
+    // =========================================================
+
     const getStudentSettings = () => {
-
         try {
-
             const savedSettings =
                 localStorage.getItem("studentSettings");
 
@@ -67,48 +69,37 @@ function Dashboard() {
     };
 
 
+    // =========================================================
+    // FETCH LATEST SENSOR DATA
+    // =========================================================
+
     const fetchSensorData = async () => {
 
         try {
 
-            const sensorResponse =
+            const response =
                 await api.get(
-                    "/api/sensor/readings"
+                    "/api/sensor/readings/room/ROOM-204/latest"
                 );
 
-            const readings = Array.isArray(
-                sensorResponse.data
-            )
-                ? sensorResponse.data
-                : [];
+            const readings =
+                Array.isArray(response.data)
+                    ? response.data
+                    : [];
 
-            if (readings.length === 0) {
+            if (readings.length > 0) {
+
+                // Backend latest endpoint returns latest
+                // ROOM-204 reading first.
+                setSensorReading(
+                    readings[0]
+                );
+
+            } else {
+
                 setSensorReading(null);
-                return;
+
             }
-
-            const room204Readings =
-                readings.filter(
-                    (reading) =>
-                        reading.roomCode === "ROOM-204"
-                );
-
-            const availableReadings =
-                room204Readings.length > 0
-                    ? room204Readings
-                    : readings;
-
-            const latestReading = [
-                ...availableReadings,
-            ].sort(
-                (a, b) =>
-                    new Date(b.recordedAt) -
-                    new Date(a.recordedAt)
-            )[0];
-
-            setSensorReading(
-                latestReading || null
-            );
 
         } catch (err) {
 
@@ -117,9 +108,15 @@ function Dashboard() {
                 err
             );
 
+            // Sensor failure should NOT destroy
+            // the complete dashboard.
         }
     };
 
+
+    // =========================================================
+    // LOAD DASHBOARD
+    // =========================================================
 
     const loadDashboard = async (
         isRefresh = false
@@ -135,79 +132,128 @@ function Dashboard() {
 
             setError("");
 
+            // -------------------------------------------------
+            // Load student + complaints independently
+            // -------------------------------------------------
+
             const [
-                studentResponse,
-                complaintsResponse,
-                sensorResponse,
-            ] = await Promise.all([
+                studentResult,
+                complaintsResult,
+            ] = await Promise.allSettled([
                 api.get("/api/auth/me"),
                 api.get("/api/complaints"),
-                api.get("/api/sensor/readings"),
             ]);
 
-            const currentStudent =
-                studentResponse.data;
 
-            setStudent(currentStudent);
+            // -------------------------------------------------
+            // STUDENT
+            // -------------------------------------------------
 
-            const studentId =
-                currentStudent?.id;
+            if (
+                studentResult.status === "fulfilled"
+            ) {
 
-            const allComplaints =
-                Array.isArray(
-                    complaintsResponse.data
-                )
-                    ? complaintsResponse.data
-                    : [];
+                const currentStudent =
+                    studentResult.value.data;
 
-            const studentComplaints =
-                allComplaints.filter(
-                    (complaint) =>
-                        Number(
-                            complaint.studentId
-                        ) === Number(studentId)
+                setStudent(currentStudent);
+
+            } else {
+
+                console.error(
+                    "Student API error:",
+                    studentResult.reason
                 );
 
-            setComplaints(
-                studentComplaints
-            );
+            }
 
-            const readings =
-                Array.isArray(
-                    sensorResponse.data
-                )
-                    ? sensorResponse.data
-                    : [];
 
-            if (readings.length > 0) {
+            // -------------------------------------------------
+            // COMPLAINTS
+            // -------------------------------------------------
 
-                const room204Readings =
-                    readings.filter(
-                        (reading) =>
-                            reading.roomCode ===
-                            "ROOM-204"
+            if (
+                complaintsResult.status === "fulfilled"
+            ) {
+
+                const allComplaints =
+                    Array.isArray(
+                        complaintsResult.value.data
+                    )
+                        ? complaintsResult.value.data
+                        : [];
+
+                const currentStudent =
+                    studentResult.status === "fulfilled"
+                        ? studentResult.value.data
+                        : student;
+
+                const studentId =
+                    currentStudent?.id;
+
+                const studentComplaints =
+                    allComplaints.filter(
+                        (complaint) =>
+                            Number(
+                                complaint.studentId
+                            ) === Number(studentId)
                     );
 
-                const availableReadings =
-                    room204Readings.length > 0
-                        ? room204Readings
-                        : readings;
-
-                const latestReading = [
-                    ...availableReadings,
-                ].sort(
-                    (a, b) =>
-                        new Date(b.recordedAt) -
-                        new Date(a.recordedAt)
-                )[0];
-
-                setSensorReading(
-                    latestReading || null
+                setComplaints(
+                    studentComplaints
                 );
 
             } else {
 
-                setSensorReading(null);
+                console.error(
+                    "Complaints API error:",
+                    complaintsResult.reason
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // SENSOR
+            // -------------------------------------------------
+
+            await fetchSensorData();
+
+
+            // -------------------------------------------------
+            // ERROR MESSAGE
+            // -------------------------------------------------
+
+            const studentFailed =
+                studentResult.status === "rejected";
+
+            const complaintsFailed =
+                complaintsResult.status === "rejected";
+
+            if (
+                studentFailed &&
+                complaintsFailed
+            ) {
+
+                setError(
+                    "Unable to load dashboard data from server."
+                );
+
+            } else if (studentFailed) {
+
+                setError(
+                    "Unable to load student information."
+                );
+
+            } else if (complaintsFailed) {
+
+                setError(
+                    "Unable to load complaint data."
+                );
+
+            } else {
+
+                setError("");
 
             }
 
@@ -231,12 +277,20 @@ function Dashboard() {
     };
 
 
+    // =========================================================
+    // INITIAL LOAD
+    // =========================================================
+
     useEffect(() => {
 
         loadDashboard();
 
     }, []);
 
+
+    // =========================================================
+    // AUTO REFRESH SENSOR DATA
+    // =========================================================
 
     useEffect(() => {
 
@@ -258,11 +312,19 @@ function Dashboard() {
             }, intervalMilliseconds);
 
         return () => {
-            clearInterval(intervalId);
+
+            clearInterval(
+                intervalId
+            );
+
         };
 
     }, []);
 
+
+    // =========================================================
+    // COMPLAINT STATISTICS
+    // =========================================================
 
     const totalComplaints =
         complaints.length;
@@ -290,12 +352,20 @@ function Dashboard() {
         ).length;
 
 
+    // =========================================================
+    // STUDENT NAME
+    // =========================================================
+
     const studentName =
         student?.name ||
         sessionStorage.getItem("name") ||
         localStorage.getItem("name") ||
         "Student";
 
+
+    // =========================================================
+    // SENSOR VALUES
+    // =========================================================
 
     const lightValue =
         sensorReading?.lightLevel != null
@@ -327,10 +397,18 @@ function Dashboard() {
             : "--";
 
 
+    // =========================================================
+    // NAVIGATION
+    // =========================================================
+
     const goTo = (path) => {
         window.location.href = path;
     };
 
+
+    // =========================================================
+    // LOADING
+    // =========================================================
 
     if (loading) {
 
@@ -349,10 +427,16 @@ function Dashboard() {
     }
 
 
+    // =========================================================
+    // DASHBOARD UI
+    // =========================================================
+
     return (
         <div className="student-dashboard">
 
-            {/* Welcome Header */}
+            {/* =================================================
+                WELCOME HEADER
+            ================================================= */}
 
             <div className="student-dashboard-header">
 
@@ -397,7 +481,9 @@ function Dashboard() {
             </div>
 
 
-            {/* Backend Error */}
+            {/* =================================================
+                BACKEND ERROR
+            ================================================= */}
 
             {error && (
 
@@ -430,14 +516,20 @@ function Dashboard() {
             )}
 
 
-            {/* Complaint Statistics */}
+            {/* =================================================
+                COMPLAINT STATISTICS
+            ================================================= */}
 
             <section className="student-stat-grid">
+
+                {/* TOTAL */}
 
                 <div className="student-stat-card">
 
                     <div className="student-stat-icon complaints">
+
                         <ClipboardList size={19} />
+
                     </div>
 
                     <div>
@@ -455,10 +547,14 @@ function Dashboard() {
                 </div>
 
 
+                {/* RESOLVED */}
+
                 <div className="student-stat-card">
 
                     <div className="student-stat-icon resolved">
+
                         <CheckCircle2 size={19} />
+
                     </div>
 
                     <div>
@@ -476,10 +572,14 @@ function Dashboard() {
                 </div>
 
 
+                {/* IN PROGRESS */}
+
                 <div className="student-stat-card">
 
                     <div className="student-stat-icon progress">
+
                         <Clock3 size={19} />
+
                     </div>
 
                     <div>
@@ -497,10 +597,14 @@ function Dashboard() {
                 </div>
 
 
+                {/* OPEN */}
+
                 <div className="student-stat-card">
 
                     <div className="student-stat-icon open">
+
                         <CircleAlert size={19} />
+
                     </div>
 
                     <div>
@@ -520,7 +624,9 @@ function Dashboard() {
             </section>
 
 
-            {/* Quick Actions */}
+            {/* =================================================
+                QUICK ACTIONS
+            ================================================= */}
 
             <section className="student-section">
 
@@ -544,6 +650,8 @@ function Dashboard() {
 
                 <div className="student-action-grid">
 
+                    {/* RAISE COMPLAINT */}
+
                     <button
                         type="button"
                         className="student-action-card"
@@ -555,7 +663,9 @@ function Dashboard() {
                     >
 
                         <div className="student-action-icon purple">
+
                             <Plus size={19} />
+
                         </div>
 
                         <div>
@@ -575,6 +685,8 @@ function Dashboard() {
                     </button>
 
 
+                    {/* MY COMPLAINTS */}
+
                     <button
                         type="button"
                         className="student-action-card"
@@ -586,7 +698,9 @@ function Dashboard() {
                     >
 
                         <div className="student-action-icon green">
+
                             <ClipboardList size={19} />
+
                         </div>
 
                         <div>
@@ -606,16 +720,22 @@ function Dashboard() {
                     </button>
 
 
+                    {/* SUPPORT */}
+
                     <button
                         type="button"
                         className="student-action-card"
                         onClick={() =>
-                            goTo("/student/help")
+                            goTo(
+                                "/student/help"
+                            )
                         }
                     >
 
                         <div className="student-action-icon orange">
+
                             <CircleAlert size={19} />
+
                         </div>
 
                         <div>
@@ -639,7 +759,9 @@ function Dashboard() {
             </section>
 
 
-            {/* Campus Overview */}
+            {/* =================================================
+                CAMPUS OVERVIEW
+            ================================================= */}
 
             <section className="student-section">
 
@@ -662,7 +784,9 @@ function Dashboard() {
                     {sensorReading?.roomCode && (
 
                         <span className="student-room-badge">
+
                             {sensorReading.roomCode}
+
                         </span>
 
                     )}
@@ -672,10 +796,14 @@ function Dashboard() {
 
                 <div className="student-overview-grid">
 
+                    {/* LIGHT */}
+
                     <div className="student-overview-card light">
 
                         <div className="student-overview-icon">
+
                             <Lightbulb size={20} />
+
                         </div>
 
                         <div>
@@ -693,10 +821,14 @@ function Dashboard() {
                     </div>
 
 
+                    {/* TEMPERATURE */}
+
                     <div className="student-overview-card temperature">
 
                         <div className="student-overview-icon">
+
                             <Thermometer size={20} />
+
                         </div>
 
                         <div>
@@ -714,10 +846,14 @@ function Dashboard() {
                     </div>
 
 
+                    {/* HUMIDITY */}
+
                     <div className="student-overview-card humidity">
 
                         <div className="student-overview-icon">
+
                             <Droplets size={20} />
+
                         </div>
 
                         <div>
@@ -735,10 +871,14 @@ function Dashboard() {
                     </div>
 
 
+                    {/* MOTION */}
+
                     <div className="student-overview-card motion">
 
                         <div className="student-overview-icon">
+
                             <Activity size={20} />
+
                         </div>
 
                         <div>

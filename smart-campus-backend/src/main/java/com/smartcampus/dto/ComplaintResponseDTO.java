@@ -23,6 +23,8 @@ public class ComplaintResponseDTO {
     private String title;
     private String description;
 
+    private String imageData;
+
     private String category;
     private String priority;
     private String status;
@@ -72,6 +74,10 @@ public class ComplaintResponseDTO {
 
                 .description(
                         complaint.getDescription()
+                )
+
+                .imageData(
+                        complaint.getImageData()
                 )
 
                 .category(

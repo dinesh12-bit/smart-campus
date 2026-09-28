@@ -36,6 +36,10 @@ public class Complaint {
     @Column(nullable = false, length = 1000)
     private String description;
 
+    @Lob
+    @Column(name = "image_data", columnDefinition = "LONGTEXT")
+    private String imageData;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private ComplaintCategory category;
@@ -56,6 +60,7 @@ public class Complaint {
 
     @PrePersist
     protected void onCreate() {
+
         createdAt = LocalDateTime.now();
 
         if (status == null) {

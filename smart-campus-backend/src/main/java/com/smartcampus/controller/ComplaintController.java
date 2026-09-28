@@ -15,12 +15,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/complaints")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
 public class ComplaintController {
 
     private final ComplaintService complaintService;
 
-    // Create complaint
+    // =========================================================
+    // CREATE COMPLAINT
+    // =========================================================
+
     @PostMapping
     public ResponseEntity<ComplaintResponseDTO> createComplaint(
             @Valid @RequestBody ComplaintRequestDTO request
@@ -34,7 +36,10 @@ public class ComplaintController {
                 .body(response);
     }
 
-    // Get all complaints
+    // =========================================================
+    // GET ALL COMPLAINTS
+    // =========================================================
+
     @GetMapping
     public ResponseEntity<List<ComplaintResponseDTO>> getAllComplaints() {
 
@@ -43,7 +48,10 @@ public class ComplaintController {
         );
     }
 
-    // Get complaint by ID
+    // =========================================================
+    // GET COMPLAINT BY ID
+    // =========================================================
+
     @GetMapping("/{id}")
     public ResponseEntity<ComplaintResponseDTO> getComplaintById(
             @PathVariable Long id
@@ -54,18 +62,26 @@ public class ComplaintController {
         );
     }
 
-    // Get complaints of a student
+    // =========================================================
+    // GET STUDENT COMPLAINTS
+    // =========================================================
+
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<ComplaintResponseDTO>> getStudentComplaints(
             @PathVariable Long studentId
     ) {
 
         return ResponseEntity.ok(
-                complaintService.getStudentComplaints(studentId)
+                complaintService.getStudentComplaints(
+                        studentId
+                )
         );
     }
 
-    // Assign technician
+    // =========================================================
+    // ASSIGN TECHNICIAN
+    // =========================================================
+
     @PutMapping("/{id}/assign/{technicianId}")
     public ResponseEntity<ComplaintResponseDTO> assignTechnician(
             @PathVariable Long id,
@@ -80,7 +96,10 @@ public class ComplaintController {
         );
     }
 
-    // Get technician complaints
+    // =========================================================
+    // GET TECHNICIAN COMPLAINTS
+    // =========================================================
+
     @GetMapping("/technician/{technicianId}")
     public ResponseEntity<List<ComplaintResponseDTO>> getTechnicianComplaints(
             @PathVariable Long technicianId
@@ -93,7 +112,10 @@ public class ComplaintController {
         );
     }
 
-    // Update complaint status
+    // =========================================================
+    // UPDATE STATUS
+    // =========================================================
+
     @PutMapping("/{id}/status")
     public ResponseEntity<ComplaintResponseDTO> updateStatus(
             @PathVariable Long id,
@@ -101,7 +123,10 @@ public class ComplaintController {
     ) {
 
         return ResponseEntity.ok(
-                complaintService.updateStatus(id, status)
+                complaintService.updateStatus(
+                        id,
+                        status
+                )
         );
     }
 }

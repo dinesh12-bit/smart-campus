@@ -5,15 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -28,20 +28,40 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+
+    // ============================================================
+    // SECURITY FILTER CHAIN
+    // ============================================================
+
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http) throws Exception {
 
         http
+
+                // =================================================
+                // CORS
+                // =================================================
+
                 .cors(cors ->
                         cors.configurationSource(
                                 corsConfigurationSource()
                         )
                 )
 
+
+                // =================================================
+                // CSRF
+                // =================================================
+
                 .csrf(csrf ->
                         csrf.disable()
                 )
+
+
+                // =================================================
+                // SESSION MANAGEMENT
+                // =================================================
 
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
@@ -49,11 +69,16 @@ public class SecurityConfig {
                         )
                 )
 
+
+                // =================================================
+                // AUTHORIZATION
+                // =================================================
+
                 .authorizeHttpRequests(auth -> auth
 
-                        // ==============================
+                        // =================================================
                         // CORS PREFLIGHT
-                        // ==============================
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
@@ -62,9 +87,9 @@ public class SecurityConfig {
                         .permitAll()
 
 
-                        // ==============================
-                        // AUTH
-                        // ==============================
+                        // =================================================
+                        // AUTH APIs
+                        // =================================================
 
                         .requestMatchers(
                                 "/api/auth/login",
@@ -75,9 +100,9 @@ public class SecurityConfig {
                         .permitAll()
 
 
-                        // ==============================
-                        // AUTHENTICATED USER
-                        // ==============================
+                        // =================================================
+                        // CURRENT USER
+                        // =================================================
 
                         .requestMatchers(
                                 "/api/auth/me"
@@ -85,14 +110,15 @@ public class SecurityConfig {
                         .authenticated()
 
 
-                        // ==============================
+                        // =================================================
                         // ADMIN ONLY
-                        // ==============================
+                        // =================================================
 
                         .requestMatchers(
                                 "/api/users/**"
                         )
                         .hasRole("ADMIN")
+
 
                         .requestMatchers(
                                 "/api/rooms/**"
@@ -100,12 +126,10 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
 
 
-                        // ==============================
-                        // ESP32 SENSOR DATA
-                        // ==============================
+                        // =================================================
+                        // ESP32 SENSOR POST
+                        // =================================================
 
-                        // ESP32 sends sensor data
-                        // No JWT required
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/sensor/readings"
@@ -113,23 +137,21 @@ public class SecurityConfig {
                         .permitAll()
 
 
-                        // ==============================
-                        // SENSOR DATA READ
-                        // ==============================
+                        // =================================================
+                        // SENSOR GET
+                        // =================================================
 
-                        // Dashboard can read sensor data
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/api/sensor/readings"
+                                "/api/sensor/readings/**"
                         )
-                        .hasAnyRole(
-                                "ADMIN",
-                                "TECHNICIAN",
-                                "STUDENT"
-                        )
+                        .permitAll()
 
 
-                        // Other sensor operations
+                        // =================================================
+                        // OTHER SENSOR APIs
+                        // =================================================
+
                         .requestMatchers(
                                 "/api/sensor/**"
                         )
@@ -139,9 +161,9 @@ public class SecurityConfig {
                         )
 
 
-                        // ==============================
+                        // =================================================
                         // COMPLAINTS
-                        // ==============================
+                        // =================================================
 
                         .requestMatchers(
                                 "/api/complaints/**"
@@ -153,9 +175,9 @@ public class SecurityConfig {
                         )
 
 
-                        // ==============================
+                        // =================================================
                         // ERROR
-                        // ==============================
+                        // =================================================
 
                         .requestMatchers(
                                 "/error"
@@ -163,32 +185,39 @@ public class SecurityConfig {
                         .permitAll()
 
 
-                        // ==============================
+                        // =================================================
                         // EVERYTHING ELSE
-                        // ==============================
+                        // =================================================
 
                         .anyRequest()
                         .authenticated()
                 )
+
+
+                // =================================================
+                // JWT FILTER
+                // =================================================
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 );
 
+
         return http.build();
     }
 
 
-    // ==============================
+    // ============================================================
     // CORS CONFIGURATION
-    // ==============================
+    // ============================================================
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration =
                 new CorsConfiguration();
+
 
         configuration.setAllowedOrigins(
                 List.of(
@@ -197,6 +226,7 @@ public class SecurityConfig {
                         "https://dinesh12-bit.github.io"
                 )
         );
+
 
         configuration.setAllowedMethods(
                 List.of(
@@ -209,6 +239,7 @@ public class SecurityConfig {
                 )
         );
 
+
         configuration.setAllowedHeaders(
                 List.of(
                         "Authorization",
@@ -219,29 +250,34 @@ public class SecurityConfig {
                 )
         );
 
+
         configuration.setExposedHeaders(
                 List.of(
                         "Authorization"
                 )
         );
 
+
         configuration.setAllowCredentials(true);
+
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
+
 
         source.registerCorsConfiguration(
                 "/**",
                 configuration
         );
 
+
         return source;
     }
 
 
-    // ==============================
+    // ============================================================
     // AUTHENTICATION MANAGER
-    // ==============================
+    // ============================================================
 
     @Bean
     public AuthenticationManager authenticationManager(

@@ -25,5 +25,15 @@ public interface ComplaintRepository
             Long technicianId
     );
 
+    /*
+     * Returns:
+     * 1. Complaints assigned to the current technician
+     * 2. Complaints which are not assigned to anyone yet
+     */
+    List<Complaint>
+    findByTechnician_IdOrTechnicianIsNullOrderByCreatedAtDesc(
+            Long technicianId
+    );
+
     List<Complaint> findAllByOrderByCreatedAtDesc();
 }
