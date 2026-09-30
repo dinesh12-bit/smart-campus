@@ -1,6 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import {
+    Eye,
+    EyeOff,
+    Mail,
+    Lock,
+    X,
+    ShieldCheck,
+    Wrench,
+    GraduationCap,
+    LogIn,
+} from "lucide-react";
 
 import api from "../../api/axios";
 
@@ -17,25 +27,79 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const [showPassword, setShowPassword] =
-        useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const [rememberMe, setRememberMe] =
-        useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
-    const [loading, setLoading] =
-        useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const [error, setError] =
-        useState("");
+    const [error, setError] = useState("");
+
+    // Demo login popup
+    const [showDemoPopup, setShowDemoPopup] = useState(true);
 
 
+    /*
+     * Demo accounts
+     */
+    const demoAccounts = [
+        {
+            role: "ADMIN",
+            title: "Admin Login",
+            email: "admin@smartcampus.com",
+            password: "admin@smartcampus.com",
+            icon: ShieldCheck,
+        },
+        {
+            role: "TECHNICIAN",
+            title: "Technician Login",
+            email: "technician@tech.com",
+            password: "technician@tech.com",
+            icon: Wrench,
+        },
+        {
+            role: "STUDENT",
+            title: "Student Login",
+            email: "student@test.com",
+            password: "student@test.com",
+            icon: GraduationCap,
+        },
+    ];
+
+
+    /*
+     * Show popup whenever Login page is opened.
+     *
+     * If you want it only once per browser later,
+     * we can change this to localStorage.
+     */
+    useEffect(() => {
+        setShowDemoPopup(true);
+    }, []);
+
+
+    /*
+     * Fill selected demo credentials
+     */
+    const handleDemoLogin = (account) => {
+
+        setUsername(account.email);
+        setPassword(account.password);
+
+        setError("");
+
+        setShowDemoPopup(false);
+    };
+
+
+    /*
+     * Login
+     */
     const handleLogin = async (e) => {
 
         e.preventDefault();
 
         setError("");
-
 
         if (
             !username.trim() ||
@@ -73,10 +137,7 @@ function Login() {
 
             /*
              * Remove old login/session data.
-             * This prevents an old Technician/Student
-             * token from being used for Admin.
              */
-
             localStorage.clear();
             sessionStorage.clear();
 
@@ -119,8 +180,7 @@ function Login() {
 
 
             /*
-             * Redirect according to
-             * authenticated backend role.
+             * Redirect according to backend role.
              */
 
             if (
@@ -587,6 +647,172 @@ function Login() {
 
 
             </div>
+
+
+            {/* =====================================================
+                DEMO LOGIN POPUP
+            ===================================================== */}
+
+            {showDemoPopup && (
+
+                <div className="demo-popup-overlay">
+
+                    <div className="demo-popup">
+
+
+                        {/* HEADER */}
+
+                        <div className="demo-popup-header">
+
+                            <div>
+
+                                <h2>
+                                    Demo Login Details
+                                </h2>
+
+                                <p>
+                                    Use these demo accounts to explore Smart Campus.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                className="demo-close-button"
+                                onClick={() =>
+                                    setShowDemoPopup(false)
+                                }
+                                aria-label="Close demo login"
+                            >
+
+                                <X size={20} />
+
+                            </button>
+
+                        </div>
+
+
+                        {/* ACCOUNTS */}
+
+                        <div className="demo-accounts">
+
+                            {demoAccounts.map((account) => {
+
+                                const Icon =
+                                    account.icon;
+
+                                return (
+
+                                    <div
+                                        className="demo-account-card"
+                                        key={account.role}
+                                    >
+
+                                        <div className="demo-account-top">
+
+                                            <div className="demo-role-icon">
+
+                                                <Icon
+                                                    size={20}
+                                                />
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <h3>
+                                                    {account.title}
+                                                </h3>
+
+                                                <span>
+                                                    {account.role}
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div className="demo-credentials">
+
+                                            <div className="demo-field">
+
+                                                <span>
+                                                    Email
+                                                </span>
+
+                                                <strong>
+                                                    {account.email}
+                                                </strong>
+
+                                            </div>
+
+
+                                            <div className="demo-field">
+
+                                                <span>
+                                                    Password
+                                                </span>
+
+                                                <strong>
+                                                    {account.password}
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            className="demo-use-button"
+                                            onClick={() =>
+                                                handleDemoLogin(
+                                                    account
+                                                )
+                                            }
+                                        >
+
+                                            <LogIn size={16} />
+
+                                            Use {account.title}
+
+                                        </button>
+
+                                    </div>
+
+                                );
+
+                            })}
+
+                        </div>
+
+
+                        <div className="demo-popup-footer">
+
+                            <span>
+                                Demo accounts are provided for project demonstration.
+                            </span>
+
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setShowDemoPopup(false)
+                                }
+                            >
+                                Continue to Login
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            )}
 
         </div>
 
